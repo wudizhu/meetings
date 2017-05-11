@@ -1,0 +1,13 @@
+<div class="form-container">
+ <div class="welcome">{{ welcome }}</div>
+  <img src="assets/images/gift.png" id="gift">
+
+    <span class="error" *ngIf="error">{{ error }}</span>
+
+
+  <!--<button (click)="loginFb()" id="fb">Login With Facebook</button><br>
+  <button (click)="loginGoogle()" id="google">Login With Google</button>-->
+  <button routerLink="/login-email" id="email" class="basic-btn">Log in</button>
+
+  <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
+</div>

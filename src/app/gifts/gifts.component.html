@@ -1,0 +1,21 @@
+<div class="form-container" id="content-page">
+  <h2>Gifts</h2>
+  <ul class="gifts">
+    <li *ngFor="let gift of gifts" [class.selected]="gift === selectedGift" (click)="onSelect(gift)">
+      <!-- each gift goes here -->
+      <span class="badge">{{gift.id}}</span>
+      <span>{{gift.name}}</span>
+      <button class="delete" (click)="delete(gift); $event.stopProgagation()">x</button>
+    </li>
+  </ul>
+  <div *ngIf="selectedGift">
+    <h2>
+      {{selectedGift.name | uppercase}} is the gift
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+  </div>
+  <div>
+    <label>Gift Name:</label><input #giftName/>
+    <button class="basic-btn" (click)="add(giftName.value); giftName.value=''">Add</button>
+  </div>
+</div>

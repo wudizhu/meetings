@@ -1,0 +1,74 @@
+import { GiftDetailComponent } from './gift-detail/gift-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GiftesComponent } from './gifts/gifts.component';
+import { AppComponent } from './app.component';
+// import { DashboardComponent } from './dashboard.component';
+// import { GiftesComponent } from './gifts.component';
+// import {GiftDetailComponent} from './gift-detail.component';
+// import { HomePageComponent } from './home-page/home-page.component';
+import { NgModule }      from '@angular/core';
+
+import { RouterModule, Routes } from '@angular/router';
+
+import { AuthGuard } from './providers/auth.service';
+import { MembersComponent } from './members/members.component';
+import { ModuleWithProviders } from '@angular/core';
+
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { EmailComponent } from './email/email.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+
+const routes: Routes = [
+    { path: '',
+      redirectTo: '/login',
+      pathMatch: 'full' },
+    { path: 'login',
+      component: LoginComponent },
+    { path: 'signup',
+      component: SignupComponent, canActivate: [AuthGuard] },
+    { path: 'login-email',
+      component: EmailComponent },
+    { path: 'members',
+      component: MembersComponent, canActivate: [AuthGuard] },
+    { path: 'gifts', component: GiftesComponent},
+    { path: 'dashboard', component: DashboardComponent },
+    {
+      path: 'detail/:id',
+      component: GiftDetailComponent
+    },
+    { path: '**', component: PageNotFoundComponent },
+
+]
+
+// const routes: Routes = [
+//     {
+//       path: '',
+//       component: HomePageComponent
+//     },
+//     {
+//       path: 'login',
+//       component: AppComponent
+//     },
+//     {
+//       path: 'gifts',
+//       component: GiftesComponent
+//     },
+//     {
+//       path: 'dashboard',
+//       component: DashboardComponent
+//     },
+//     {
+//       path: 'detail/:id',
+//       component: GiftDetailComponent
+//     }
+
+// ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+
+export class AppRoutingModule {}

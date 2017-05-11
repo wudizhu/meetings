@@ -1,0 +1,48 @@
+{
+    "users": {
+      "Hongyan": {
+          "name": "Hongyan",
+          "hobby": "cooking"
+        },
+      "Feng": {
+          "name": "Feng",
+          "hobby": "gaming"
+        }
+    },
+
+    "gifts": {
+      "Hongyan": {
+            "desired-gifts": {
+                "ipad": {
+                    "description": "iPad",
+                    "where-to-buy": "Edinburgh apple store",
+                    "added-time": "2017-04-15",
+                    "recieve-time" : "in 2018",
+                    "desired-rating" : 9,
+                    "recieved" : true
+                },
+              "wok": {
+                    "description": "iPad",
+                    "where-to-buy": "Edinburgh apple store",
+                    "added-time": "2017-04-15",
+                    "recieve-time" : "in 2018",
+                    "desired-rating" : 7,
+                    "recieved" : false
+                  }
+            }
+
+      },
+      "Feng": {
+            "desired-gifts": {
+                "surface-pro": {
+                    "description": "Surface pro",
+                    "where-to-buy": "do not know yet",
+                    "added-time": "2017-04-15",
+                    "recieve-time" : "in 2020",
+                    "desired-rating" : 6,
+                    "recieved" : false
+                }
+            }
+      }
+    }
+}

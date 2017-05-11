@@ -1,0 +1,9 @@
+@media (max-width: 600px) {
+    #page {
+        padding:1em;
+    }
+    #toolbar {
+        width:90%;
+        margin-left: -45%;
+    }
+}
