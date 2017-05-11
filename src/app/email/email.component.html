@@ -1,4 +1,4 @@
-<div class="form-container">
+<!--<div class="form-container">
     <a routerLink="/login" id="goback">Go back</a>
     <h2>Custom Login</h2>
 
@@ -12,41 +12,62 @@
       <button type="submit" [disabled]="!formData.valid" class="basic-btn">Log in</button>
       <a routerLink="/signup" class="alc">Don't have an account?</a>
   </form>
+
+      <md-dialog id="login-dialog" aria-label="Login" ng-cloak>
+      <form name="loginForm" ng-submit="dialog.login()">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>Log In</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="dialog.close()">
+              <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+          <div class="md-dialog-content">
+            <md-input-container class="md-block">
+              <label>Username</label>
+              <input name="username" ng-model="dialog.username" md-autofocus required />
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <input type="password" name="password" ng-model="dialog.password" required />
+            </md-input-container>
+          </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+          <a href="" class="md-primary">Forgot Password?</a>
+          <span flex></span>
+          <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary">Login</md-button>
+        </md-dialog-actions>
+      </form>
+    </md-dialog>
+</div>-->
+    <md-input-container>
+      <input type="password" mdInput placeholder="Favorite food" value="Sushi">
+    </md-input-container>
+
+    <md-input-container>
+      <input type="password" mdInput placeholder="Password" (ngModel)="password" name="password" required>
+    </md-input-container>
+
+<div>
+  <form >
+      <p>
+        <md-input-container>
+          <input (ngModel)="email" name="email" required mdInput placeholder="Email Account">
+        </md-input-container>
+      </p>
+
+        <md-input-container>
+          <input type="password" mdInput placeholder="Password" (ngModel)="password" name="password" required>
+        </md-input-container>
+
+  </form>
+  <button type="submit" [disabled]="!formData.valid">Log in</button>
+  <a routerLink="/signup" class="alc">Don't have an account?</a>
+  <a routerLink="/login" id="goback">Go back</a>
 </div>
-
-<!--<form class="example-form">
-  <md-input-container class="example-full-width">
-    <input mdInput placeholder="Company (disabled)" disabled value="Google">
-  </md-input-container>
-
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><md-input-container class="example-full-width">
-      <input mdInput placeholder="First name">
-    </md-input-container></td>
-    <td><md-input-container class="example-full-width">
-      <input mdInput placeholder="Long Last Name That Will Be Truncated">
-    </md-input-container></td>
-  </tr></table>
-
-  <p>
-    <md-input-container class="example-full-width">
-      <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-    </md-input-container>
-    <md-input-container class="example-full-width">
-      <textarea mdInput placeholder="Address 2"></textarea>
-    </md-input-container>
-  </p>
-
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><md-input-container class="example-full-width">
-      <input mdInput placeholder="City">
-    </md-input-container></td>
-    <td><md-input-container class="example-full-width">
-      <input mdInput placeholder="State">
-    </md-input-container></td>
-    <td><md-input-container class="example-full-width">
-      <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-      <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-    </md-input-container></td>
-  </tr></table>
-</form>-->
