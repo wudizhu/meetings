@@ -4,7 +4,6 @@ import { InMemoryDataService } from './providers/in-memory-data.service';
 import { GiftHttpService } from './providers/gift.httpService';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule} from '@angular/material';
 import { NgModule, animate } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -23,6 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GiftDetailComponent } from './gift-detail/gift-detail.component';
 import { GiftSearchComponent } from './gift-search/gift-search.component';
 import { GiftesComponent } from './gifts/gifts.component';
+import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
+
 
 
 export const environment = {
@@ -54,11 +55,11 @@ export const environment = {
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AngularFireModule.initializeApp(environment.firebase),
-    AppRoutingModule
+    AppRoutingModule,
+    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule
   ],
   providers: [AuthGuard, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase],
   bootstrap: [AppComponent]

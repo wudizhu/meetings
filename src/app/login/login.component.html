@@ -1,13 +1,16 @@
-<div class="form-container">
- <div class="welcome">{{ welcome }}</div>
-  <img src="assets/images/gift.png" id="gift">
-
-    <span class="error" *ngIf="error">{{ error }}</span>
-
-
-  <!--<button (click)="loginFb()" id="fb">Login With Facebook</button><br>
-  <button (click)="loginGoogle()" id="google">Login With Google</button>-->
-  <button routerLink="/login-email" id="email" class="basic-btn">Log in</button>
-
-  <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
+<div>
+  <md-card class="container">
+    <md-card-header>
+      <md-card-title class="title">{{welcome}}</md-card-title>
+    </md-card-header>
+    <img md-card-image class="img-round" src="assets/images/gift.png">
+    <md-card-actions>
+      <button md-raised-button color="primary" class="login-button" routerLink="/login-email" id="email">Log in</button>
+    </md-card-actions>
+    <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
+    <md-card-footer>
+      <span class="error" *ngIf="error">{{ error }}</span>
+    </md-card-footer>
+    <a href="http://www.freepik.com/free-photos-vectors/christmas"><h6>Christmas vector created by Freepik</h6></a>
+  </md-card>
 </div>

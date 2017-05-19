@@ -4,23 +4,21 @@
  padding: 0px;
  border: 0px;
  }
- body {
- font: 1em/1.25 Arial, Helvetica, sans-serif;
- }
+
 
  /* Headlines */
  h1, h2, h3, h4, h5, h6 {
  margin: 0;
  padding: 0;
  font-weight: normal;
- font-family: Arial, Helvetica, sans-serif;
+ font-family: roboto, Helvetica, sans-serif;
  }
 
  /* Text Styles */
  p, th, td, li, dd, dt, ul, ol, blockquote, q, acronym, abbr, a, input, select, textarea {
  margin: 0;
  padding: 0;
- font: normal normal normal 1em/1.25 Arial, Helvetica, sans-serif;
+ font: normal normal normal 1em/1.25 Roboto, Helvetica, sans-serif;
  }
 
 input:-webkit-autofill {
@@ -109,3 +107,53 @@ select:-webkit-autofill:focus {
  .nomargin { margin: 0; }
  .nopadding { padding: 0; }
  .nobullet { list-style: none; list-style-image: none; }
+
+ /*global style*/
+ body {
+    background-color: lightslategrey;
+    font: 1em/1.25 roboto, Helvetica, sans-serif;
+ }
+
+/*loading animation*/
+.loading {
+  width: 30px;
+  height: 30px;
+  border: 5px solid #ccc;
+  position: fixed;
+  left: 50%;
+  margin-left: -20px;
+  top: 50%;
+  margin-top: -20px;
+  border-radius: 50%;
+}
+
+
+.loading:after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 10px;
+  background: #E2E4E6;
+  top: 10px;
+  left: -5px;
+  animation: spin 1.2s infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* alignment trick for menu*/
+.spacer {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+/*import theme*/
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+
