@@ -23,6 +23,7 @@
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
+    box-shadow: 0 0 0px 1000px white inset;
 }
 
 /*The following will disable placeholder as well*/
@@ -40,6 +41,13 @@ select:-webkit-autofill:focus {
 }*/
 
 @-webkit-keyframes autofill {
+        to {
+            color: #fff;
+            background: transparent;
+        }
+}
+
+@keyframes autofill {
         to {
             color: #fff;
             background: transparent;
@@ -152,8 +160,8 @@ select:-webkit-autofill:focus {
     flex: 1 1 auto;
 }
 
-/*import theme*/
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
 
 
 

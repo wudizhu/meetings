@@ -2,10 +2,6 @@ import { GiftDetailComponent } from './gift-detail/gift-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GiftesComponent } from './gifts/gifts.component';
 import { AppComponent } from './app.component';
-// import { DashboardComponent } from './dashboard.component';
-// import { GiftesComponent } from './gifts.component';
-// import {GiftDetailComponent} from './gift-detail.component';
-// import { HomePageComponent } from './home-page/home-page.component';
 import { NgModule }      from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -25,7 +21,7 @@ const routes: Routes = [
       redirectTo: '/login',
       pathMatch: 'full' },
     { path: 'login',
-      component: LoginComponent },
+      component: EmailComponent },
     { path: 'signup',
       component: SignupComponent, canActivate: [AuthGuard] },
     { path: 'login-email',

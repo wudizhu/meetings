@@ -23,8 +23,7 @@ import { GiftDetailComponent } from './gift-detail/gift-detail.component';
 import { GiftSearchComponent } from './gift-search/gift-search.component';
 import { GiftesComponent } from './gifts/gifts.component';
 import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
-
-
+import {OverlayContainer} from '@angular/material';
 
 export const environment = {
   production: false,
@@ -64,4 +63,8 @@ export const environment = {
   providers: [AuthGuard, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(overlayContainer: OverlayContainer) {
+    overlayContainer.themeClass = 'dark-theme';
+  }
+}

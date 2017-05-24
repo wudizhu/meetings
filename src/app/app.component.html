@@ -1,7 +1,21 @@
-<md-toolbar color="primary">Gifts</md-toolbar>
+<md-toolbar color="primary">
+  <span>Gifts</span>
+  <span class="spacer"></span>
+  <button md-icon-button [mdMenuTriggerFor]="sideMenu">
+    <md-icon>more_vert</md-icon>
+  </button>
+
+  <md-menu  #sideMenu="mdMenu" [overlapTrigger]="false">
+    <button md-menu-item class="menu-item">
+      <md-icon>fingerprint</md-icon>
+      <span class="side-menu-item">Login</span>
+    </button>
+    <button md-menu-item class="menu-item">
+      <md-icon>help</md-icon>
+      <span class="side-menu-item">Help</span>
+    </button>
+  </md-menu>
+
+</md-toolbar>
+
 <router-outlet></router-outlet>
-
-
-
-
-

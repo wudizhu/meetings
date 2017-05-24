@@ -1,73 +1,31 @@
-<!--<div class="form-container">
-    <a routerLink="/login" id="goback">Go back</a>
-    <h2>Custom Login</h2>
-
-    <span class="error" *ngIf="error">{{ error }}</span>
-
-    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-
-      <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
-      <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
-
-      <button type="submit" [disabled]="!formData.valid" class="basic-btn">Log in</button>
-      <a routerLink="/signup" class="alc">Don't have an account?</a>
-  </form>
-
-      <md-dialog id="login-dialog" aria-label="Login" ng-cloak>
-      <form name="loginForm" ng-submit="dialog.login()">
-        <md-toolbar>
-          <div class="md-toolbar-tools">
-            <h2>Log In</h2>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="dialog.close()">
-              <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
-
-        <md-dialog-content>
-          <div class="md-dialog-content">
-            <md-input-container class="md-block">
-              <label>Username</label>
-              <input name="username" ng-model="dialog.username" md-autofocus required />
-            </md-input-container>
-            <md-input-container class="md-block">
-              <label>Password</label>
-              <input type="password" name="password" ng-model="dialog.password" required />
-            </md-input-container>
-          </div>
-        </md-dialog-content>
-
-        <md-dialog-actions layout="row">
-          <a href="" class="md-primary">Forgot Password?</a>
-          <span flex></span>
-          <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary">Login</md-button>
-        </md-dialog-actions>
-      </form>
-    </md-dialog>
-</div>-->
-    <md-input-container>
-      <input type="password" mdInput placeholder="Favorite food" value="Sushi">
-    </md-input-container>
-
-    <md-input-container>
-      <input type="password" mdInput placeholder="Password" (ngModel)="password" name="password" required>
-    </md-input-container>
-
 <div>
-  <form >
-      <p>
-        <md-input-container>
-          <input (ngModel)="email" name="email" required mdInput placeholder="Email Account">
-        </md-input-container>
-      </p>
-
-        <md-input-container>
-          <input type="password" mdInput placeholder="Password" (ngModel)="password" name="password" required>
-        </md-input-container>
-
-  </form>
-  <button type="submit" [disabled]="!formData.valid">Log in</button>
-  <a routerLink="/signup" class="alc">Don't have an account?</a>
-  <a routerLink="/login" id="goback">Go back</a>
+  <md-card  class="container">
+    <md-card-header>
+      <md-card-title class="title">{{welcome}}</md-card-title>
+    </md-card-header>
+    <img md-card-image class="img-round" src="assets/images/gift.png">
+    <div>
+    <form name="login-form">
+      <md-input-container>
+        <input (ngModel)="email" name="email" required mdInput placeholder="Email Account">
+      </md-input-container>
+      <br>
+      <md-input-container>
+        <input type="password" mdInput placeholder="Password" (ngModel)="password" name="password" required>
+      </md-input-container>
+    </form>
+    </div>
+    <md-card-actions>
+      <button md-raised-button color="primary" class="login-button"  routerLink="/login-email" (onclick)="onSubmit()">Log in</button>
+    </md-card-actions>
+    <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
+    <md-card-footer>
+      <span class="error" *ngIf="error">{{ error }}</span>
+    </md-card-footer>
+    <a href="http://www.freepik.com/free-photos-vectors/christmas">
+      <h6>Christmas vector created by Freepik</h6>
+    </a>
+  </md-card>
 </div>
+
+

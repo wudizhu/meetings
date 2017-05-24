@@ -5,7 +5,7 @@
     </md-card-header>
     <img md-card-image class="img-round" src="assets/images/gift.png">
     <md-card-actions>
-      <button md-raised-button color="primary" class="login-button" routerLink="/login-email" id="email">Log in</button>
+      <button md-raised-button color="primary" class="login-button" routerLink="/login-email" (onclick)="gotoLogin()">Log in</button>
     </md-card-actions>
     <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
     <md-card-footer>

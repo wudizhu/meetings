@@ -28,8 +28,15 @@ export class LoginComponent {
       })
   }
 
+    gotoLogin() {
+        this.router.navigate(['/login-email']);
+    }
+
+
 
 }
+
+
 
 
 
