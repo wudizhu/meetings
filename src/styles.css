@@ -116,6 +116,8 @@ select:-webkit-autofill:focus {
  .nopadding { padding: 0; }
  .nobullet { list-style: none; list-style-image: none; }
 
+/*End of the Global Defaults reset*/
+
  /*global style*/
  body {
     background-color: lightslategrey;

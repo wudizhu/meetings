@@ -1,5 +1,5 @@
 /*MD card container*/
-.container {
+.card-container {
     border: 2px solid #ccc;
     max-width: 40%;
     margin:auto;
@@ -11,19 +11,19 @@
 
 }
 
-.container:hover {
+.card-container:hover {
     border: 2px solid #777;
 }
 
-.container img {
+.card-container img {
     border-radius: 5%;
 }
 
-.container .title {
+.card-container .title {
   font-size: 2em;
 }
 
-.container .login-button {
+.card-container .login-button {
   font-size: 2em;
   padding: 0.5em 3em 0.5em 3em;
 

@@ -1,23 +1,28 @@
 <div>
-  <md-card  class="container">
+  <md-card class="card-container">
     <md-card-header>
       <md-card-title class="title">{{welcome}}</md-card-title>
     </md-card-header>
     <img md-card-image class="img-round" src="assets/images/gift.png">
     <div>
-    <form name="login-form">
-      <md-input-container>
-        <input (ngModel)="email" name="email" required mdInput placeholder="Email Account">
-      </md-input-container>
+      {{diagnostic}}
       <br>
-      <md-input-container>
-        <input type="password" mdInput placeholder="Password" (ngModel)="password" name="password" required>
-      </md-input-container>
-    </form>
+      <form #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)">
+        <!--<input mdInput placeholder="Email" value="Your email" [(ngModel)]="this.email" name="email"  [formControl]="emailFormControl">-->
+
+        <md-input-container>
+          <input mdInput type="email" placeholder="Email" #LoginEmail="ngModel" name="loginEmail" [(ngModel)]="this.email" required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        </md-input-container>
+        <br>
+        <md-input-container>
+          <input mdInput type="password" placeholder="Password" [(ngModel)]="this.password" name="password"  #LoginPassword="ngModel" required minlength=6 maxlength=12>
+        </md-input-container>
+        <md-card-actions>
+          <button [disabled]="!LoginForm.form.valid" md-raised-button color="primary" class="login-button">Log in</button>
+        </md-card-actions>
+      </form>
     </div>
-    <md-card-actions>
-      <button md-raised-button color="primary" class="login-button"  routerLink="/login-email" (onclick)="onSubmit()">Log in</button>
-    </md-card-actions>
     <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
     <md-card-footer>
       <span class="error" *ngIf="error">{{ error }}</span>
@@ -26,6 +31,6 @@
       <h6>Christmas vector created by Freepik</h6>
     </a>
   </md-card>
+
+
 </div>
-
-
