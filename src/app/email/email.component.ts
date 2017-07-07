@@ -6,7 +6,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { FormControl, Validators, NgForm, FormsModule } from '@angular/forms';
 
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+// const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+// const EMAIL_REGEX_ALTERNATIVE = "^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$";
 
 @Component({
   selector: 'app-login-email',
@@ -18,11 +19,11 @@ export class EmailComponent {
   state: string = '';
   error: any;
   welcome: string;
-  email: string;
-  password: string;
+  email: string = "";
+  password: string = "";
   feng: string;
   // formControl = new FormControl('', Validators.required);
-  emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
+  // emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
 
 
   constructor(public af: AngularFireAuth, private router: Router) {
@@ -34,11 +35,6 @@ export class EmailComponent {
       });
     }
 
-  // powers = ['Really Smart', 'Super Flexible',
-  //           'Super Hot', 'Weather Changer'];
-
-  // model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
-
   onSubmit(form: NgForm) {
     console.log(form.controls);
     console.log(form.valid);
@@ -47,12 +43,10 @@ export class EmailComponent {
   // // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.email + "||" + this.password); }
 
-  // newHero() {this.model = new Hero(42, "", "")}
-
-
-
-
+  /*Login if the credentials are valid*/
   onLogingSubmit(formData) {
+    console.log(formData);
+    console.log(formData.value.email,formData.value.password);
     if(formData.valid) {
       console.log("connecting to the server...");
       this.af.auth.signInWithEmailAndPassword(

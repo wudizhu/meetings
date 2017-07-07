@@ -24,6 +24,7 @@ import { GiftSearchComponent } from './gift-search/gift-search.component';
 import { GiftesComponent } from './gifts/gifts.component';
 import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
 import {OverlayContainer} from '@angular/material';
+import {KeysPipe} from './pipes/objects.pipe';
 
 export const environment = {
   production: false,
@@ -47,7 +48,8 @@ export const environment = {
     DashboardComponent,
     GiftDetailComponent,
     GiftSearchComponent,
-    GiftesComponent
+    GiftesComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,

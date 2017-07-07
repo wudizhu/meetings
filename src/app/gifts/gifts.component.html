@@ -1,16 +1,17 @@
-<div class="form-container" id="content-page">
+<div >
   <h2>Gifts</h2>
+  {{diagnostic}}
   <ul class="gifts">
-    <li *ngFor="let gift of gifts" [class.selected]="gift === selectedGift" (click)="onSelect(gift)">
+    <li *ngFor="let gift of gifts | keys">
       <!-- each gift goes here -->
-      <span class="badge">{{gift.id}}</span>
-      <span>{{gift.name}}</span>
-      <button class="delete" (click)="delete(gift); $event.stopProgagation()">x</button>
+      <span class="badge">{{gift.gift}}</span>
+      <span>{{gift.data.description}}</span>
+      <button class="delete" (click)="delete(); $event.stopProgagation()">x</button>
     </li>
   </ul>
   <div *ngIf="selectedGift">
     <h2>
-      {{selectedGift.name | uppercase}} is the gift
+      <!--{{selectedGift.description | uppercase}} is the gift-->
     </h2>
     <button (click)="gotoDetail()">View Details</button>
   </div>

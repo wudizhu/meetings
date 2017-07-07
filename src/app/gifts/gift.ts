@@ -1,4 +1,11 @@
 export class Gift {
-  id: number;
-  name: string;
+  gift: string;
+  value: {
+  addedtime: Date;
+  description: string;
+  desiredrating: number;
+  recievetime: Date;
+  recieved: boolean;
+  wheretobuy: string;
+  }
 }

@@ -5,19 +5,25 @@
     </md-card-header>
     <img md-card-image class="img-round" src="assets/images/gift.png">
     <div>
-      {{diagnostic}}
-      <br>
-      <form #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)">
-        <!--<input mdInput placeholder="Email" value="Your email" [(ngModel)]="this.email" name="email"  [formControl]="emailFormControl">-->
-
+      <!--{{diagnostic}}-->
+      <form #LoginForm="ngForm" (ngSubmit)="onLogingSubmit(LoginForm)">
         <md-input-container>
-          <input mdInput type="email" placeholder="Email" #LoginEmail="ngModel" name="loginEmail" [(ngModel)]="this.email" required
-            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+          <input mdInput type="email" placeholder="Email" name="email"  [(ngModel)]="this.email" #LoginEmail="ngModel"  required
+            pattern= "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+          <md-error>
+            Please provide an vaild email address, e.g, abc@d.com
+          </md-error>
         </md-input-container>
         <br>
+        <br>
         <md-input-container>
-          <input mdInput type="password" placeholder="Password" [(ngModel)]="this.password" name="password"  #LoginPassword="ngModel" required minlength=6 maxlength=12>
+          <input mdInput type="password" placeholder="Password" [(ngModel)]="this.password" name="password"  #LoginPassword="ngModel" required minlength=6 maxlength=20>
+          <md-error>
+            Password must be at least 6 characters long.
+          </md-error>
         </md-input-container>
+        <br>
+        <br>
         <md-card-actions>
           <button [disabled]="!LoginForm.form.valid" md-raised-button color="primary" class="login-button">Log in</button>
         </md-card-actions>

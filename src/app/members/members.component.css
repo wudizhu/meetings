@@ -1,44 +1,68 @@
-#content-page {
-    padding:0;
-    width:70%;
-    margin-left:-35%;
+.canvas-container {
+    border: 2px solid #ccc;
+    max-width: 40%;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;
+    box-shadow: 0 5px 5px 0;*/
+}
+.cards-container {
+    border: 2px solid #ccc;
+    max-width: 40%;
+    margin:auto;
+    display: flex;
+    flex-direction: row;
+    /*justify-content:center;*/
+    align-items: center;
+    box-shadow: 0 5px 5px 0;
+
 }
 
-header {
-    background:#3B8598;
-    width:100%;
+/*MD card container*/
+.card-container {
+    border: 2px solid #ccc;
+    max-width: 40%;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    /*justify-content:center;*/
+    align-items: center;
+    box-shadow: 0 5px 5px 0;
+
 }
 
-.basic-btn {
-    width:100px;
-    margin:0;
+.card-container:hover {
+    border: 2px solid #777;
 }
 
-#page {
-    padding:3em;
-    margin:0;
+.card-container img {
+    border-radius: 5%;
 }
 
-#page img {
-    margin-top:30px;
+.card-container .title {
+  font-size: 2em;
 }
 
-h2 {
-    margin:0;
+.card-container .login-button {
+  font-size: 2em;
+  padding: 0.5em 3em 0.5em 3em;
+
+}
+
+.action-button {
+
 }
 
 
-@media (max-width: 600px) {
-    #page {
-        padding:1em;
+@media only screen and (max-width: 700px){
+    .canvas-container {
+        min-width: 60%;
     }
-    #content-page {
-        width:90%;
-        margin-left: -45%;
-    }
 }
 
-
-gifts-dashboard {
-  margin: 250px
+@media only screen and (max-width: 500px){
+    .canvas-container {
+        min-width: 90%;
+    }
 }

@@ -1,14 +1,15 @@
 <md-toolbar color="primary">
-  <span>Gifts</span>
+  <span (click)="home()">Gifts</span>
+  <!--{{diagnostic}}-->
   <span class="spacer"></span>
   <button md-icon-button [mdMenuTriggerFor]="sideMenu">
     <md-icon>more_vert</md-icon>
   </button>
 
   <md-menu  #sideMenu="mdMenu" [overlapTrigger]="false">
-    <button md-menu-item class="menu-item">
+    <button md-menu-item class="menu-item" (click)="logout()">
       <md-icon>fingerprint</md-icon>
-      <span class="side-menu-item">Login</span>
+      <span class="side-menu-item">Logout</span>
     </button>
     <button md-menu-item class="menu-item">
       <md-icon>help</md-icon>

@@ -1,11 +1,10 @@
-import { FirebaseListObservable } from 'angularfire2/database';
-import { Component } from '@angular/core';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Component, Pipe } from '@angular/core';
 import { OnInit } from '@angular/core';
-import {Gift} from './gift';
+import { Gift } from './gift';
 import { GiftHttpService } from '../providers/gift.httpService';
 import { GiftFirebaseService } from '../providers/gift.firebaseService';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'gifts',
@@ -14,61 +13,81 @@ import { Router } from '@angular/router';
 
 })
 
+
+
 export class GiftesComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     console.log("loading gifts!");
-    this.getFirebaseGiftes();
+
+    //ToDo: get the person from the members component
+    this.getGiftes(`Hongyan`, 'firebase');
   }
 
-  gifts: Gift[] = [];
-  giftsFirebase: FirebaseListObservable<any>;
+  gift: Gift;
+  gifts: Gift[];
+  giftsFirebase: FirebaseObjectObservable<any>;
+  giftsFirebaseList: FirebaseListObservable<any>;
   selectedGift: Gift;
 
   constructor(
     private router: Router,
     private giftService: GiftHttpService,
-    private giftFirebaseService: GiftFirebaseService) {};
+    private giftFirebaseService: GiftFirebaseService) { };
 
-  getGiftes(): void {
-    this.giftService.getGiftes().then(gifts => this.gifts = gifts);
+  getGiftes(person, service): void {
+    if (service != null) {
+      if (service == 'firebase') {
+        this.giftsFirebase = this.giftFirebaseService.getGiftes(person);
+        this.giftsFirebase.subscribe(gifts => {
+          console.log("gift is " + JSON.stringify(gifts));
+          this.gifts = gifts;
+        });
+      } else {
+        this.giftService.getGiftes().then(gifts => this.gifts = gifts);
+      }
+    }
   }
 
-  getFirebaseGiftes(): void {
-    this.giftsFirebase = this.giftFirebaseService.getGiftes();
-    this.giftsFirebase.subscribe(gifts => {
-      console.log("gift is "+ JSON.stringify(gifts));
-      this.gifts = gifts;
-      console.log("gifts is "+ JSON.stringify(this.gifts));
-    });
-  }
 
-  onSelect(gift:Gift): void {
+
+  get diagnostic() { return JSON.stringify(this.gifts); }
+
+
+  // getFirebaseGiftesList(person): void {
+  //   this.giftsFirebaseList = this.giftFirebaseService.getGiftesList(person);
+  //   this.giftsFirebaseList.subscribe(gifts => {
+  //     console.log("gift is "+ JSON.stringify(gifts));
+  //     this.gifts = gifts;
+  //   });
+  // }
+
+  onSelect(gift: Gift): void {
     this.selectedGift = gift;
   }
 
-  gotoDetail() {
-    this.router.navigate(['/detail', this.selectedGift.id]);
-  }
+  // gotoDetail() {
+  //   this.router.navigate(['/detail', this.selectedGift.description);
+  // }
 
   add(name: string): void {
     name = name.trim();
-    if (!name) {return;}
+    if (!name) { return; }
     this.giftService.create(name)
       .then(gift => {
-          this.gifts.push(gift);
-          this.selectedGift = null;
+        this.gifts.push(gift);
+        this.selectedGift = null;
       });
   }
 
-  delete(gift: Gift): void {
-    this.giftService
-      .delete(gift.id)
-      .then(() => {
-        this.gifts = this.gifts.filter(h => h !== gift);
-        if (this.selectedGift ===gift) {this.selectedGift = null;}
-      });
+  // delete(gift: Gift): void {
+  //   this.giftService
+  //     .delete(gift.desiredrating)
+  //     .then(() => {
+  //       this.gifts = this.gifts.filter(h => h !== gift);
+  //       if (this.selectedGift === gift) { this.selectedGift = null; }
+  //     });
 
-  }
+  // }
 }

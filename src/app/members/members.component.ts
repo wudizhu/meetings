@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 
 export class MembersComponent implements OnInit {
   name: any;
-  state: string = '';
 
   constructor(public angularfire: AngularFireAuth, private router: Router) {
 
@@ -28,6 +27,16 @@ export class MembersComponent implements OnInit {
      this.angularfire.auth.signOut();
      console.log('logged out');
      this.router.navigate(['/login']);
+  }
+
+  manageGifts(person) {
+    console.log(person);
+    this.router.navigate(['/gifts']);
+  }
+
+  viewGifts(person) {
+    console.log(person);
+    this.router.navigate(['/gifts']);
   }
 
 

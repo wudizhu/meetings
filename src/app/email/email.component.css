@@ -32,13 +32,13 @@
 
 
 @media only screen and (max-width: 700px){
-    .container {
+    .card-container {
         min-width: 60%;
     }
 }
 
 @media only screen and (max-width: 500px){
-    .container {
+    .card-container {
         min-width: 90%;
     }
 }
