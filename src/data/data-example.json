@@ -41,6 +41,14 @@
                     "recieve-time" : "in 2020",
                     "desired-rating" : 6,
                     "recieved" : false
+                },
+                "ipad pro": {
+                    "description": "iPad pro 12.9",
+                    "where-to-buy": "Edinburgh apple store",
+                    "added-time": "2017-04-15",
+                    "recieve-time" : "in 2018",
+                    "desired-rating" : 9,
+                    "recieved" : true
                 }
             }
       }

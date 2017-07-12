@@ -1,10 +1,12 @@
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Component, Pipe } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { Gift } from './gift';
+import { GiftData } from './giftdata';
+import {Gift} from './gift';
 import { GiftHttpService } from '../providers/gift.httpService';
 import { GiftFirebaseService } from '../providers/gift.firebaseService';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'gifts',
@@ -25,8 +27,8 @@ export class GiftesComponent implements OnInit {
     this.getGiftes(`Hongyan`, 'firebase');
   }
 
-  gift: Gift;
   gifts: Gift[];
+  giftsdata: GiftData[];
   giftsFirebase: FirebaseObjectObservable<any>;
   giftsFirebaseList: FirebaseListObservable<any>;
   selectedGift: Gift;
@@ -39,10 +41,25 @@ export class GiftesComponent implements OnInit {
   getGiftes(person, service): void {
     if (service != null) {
       if (service == 'firebase') {
-        this.giftsFirebase = this.giftFirebaseService.getGiftes(person);
-        this.giftsFirebase.subscribe(gifts => {
-          console.log("gift is " + JSON.stringify(gifts));
-          this.gifts = gifts;
+        this.giftsFirebaseList = <FirebaseListObservable<any>> this.giftFirebaseService.getGiftes(person)
+          .map(items =>  {console.log("raw object is: " +  JSON.stringify(items));
+            return items.map(item => {
+              console.log("the gift key is: "+ item.$key);
+              let {"added-time": addedTime,
+              "description": description,
+              "desired-rating": desiredRating,
+              "recieve-time": recieveTime,
+              "recieved": recieved,
+              "where-to-buy": whereToBuy
+               } = item;
+              console.log(addedTime);
+              let gift= new GiftData(item.$key, addedTime, description, desiredRating, recieveTime, recieved, whereToBuy);
+              console.log(gift);
+              return gift});
+          });
+        this.giftsFirebaseList.subscribe(gifts => {
+          console.log("giftsdata are " + JSON.stringify(gifts));
+          this.giftsdata = gifts;
         });
       } else {
         this.giftService.getGiftes().then(gifts => this.gifts = gifts);
@@ -79,6 +96,14 @@ export class GiftesComponent implements OnInit {
         this.gifts.push(gift);
         this.selectedGift = null;
       });
+  }
+
+  delete() {
+
+  }
+
+  gotoDetail() {
+
   }
 
   // delete(gift: Gift): void {

@@ -2,10 +2,15 @@
   <h2>Gifts</h2>
   {{diagnostic}}
   <ul class="gifts">
-    <li *ngFor="let gift of gifts | keys">
+    <li *ngFor="let gift of giftsdata">
       <!-- each gift goes here -->
       <span class="badge">{{gift.gift}}</span>
-      <span>{{gift.data.description}}</span>
+      <span>{{gift.description}}</span>
+      <span>{{gift.desiredRating}}</span>
+      <span>{{gift.recieveTime}}</span>
+      <span>{{gift.recieved}}</span>
+      <span>{{gift.addedTime}}</span>
+      <span>{{gift.whereToBuy}}</span>
       <button class="delete" (click)="delete(); $event.stopProgagation()">x</button>
     </li>
   </ul>
