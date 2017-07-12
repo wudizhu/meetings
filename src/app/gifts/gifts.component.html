@@ -2,7 +2,7 @@
   <h2>Gifts</h2>
   {{diagnostic}}
   <ul class="gifts">
-    <li *ngFor="let gift of giftsdata">
+    <li *ngFor="let gift of giftsFirebaseList | async">
       <!-- each gift goes here -->
       <span class="badge">{{gift.gift}}</span>
       <span>{{gift.description}}</span>
