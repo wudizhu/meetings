@@ -22,9 +22,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GiftDetailComponent } from './gift-detail/gift-detail.component';
 import { GiftSearchComponent } from './gift-search/gift-search.component';
 import { GiftesComponent } from './gifts/gifts.component';
-import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
+import {MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
 import {OverlayContainer} from '@angular/material';
 import {KeysPipe} from './pipes/objects.pipe';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 export const environment = {
   production: false,
@@ -60,7 +61,15 @@ export const environment = {
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
-    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule
+    MdButtonModule,
+    MdCardModule,
+    MdMenuModule,
+    MdToolbarModule,
+    MdIconModule,
+    MdInputModule,
+    MdSliderModule,
+    MdSlideToggleModule,
+    FlexLayoutModule
   ],
   providers: [AuthGuard, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase],
   bootstrap: [AppComponent]

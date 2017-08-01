@@ -1,19 +1,49 @@
-<div >
+<div>
   <h2>Gifts</h2>
-  {{diagnostic}}
-  <ul class="gifts">
-    <li *ngFor="let gift of giftsFirebaseList | async">
-      <!-- each gift goes here -->
-      <span class="badge">{{gift.gift}}</span>
-      <span>{{gift.description}}</span>
-      <span>{{gift.desiredRating}}</span>
-      <span>{{gift.recieveTime}}</span>
-      <span>{{gift.recieved}}</span>
-      <span>{{gift.addedTime}}</span>
-      <span>{{gift.whereToBuy}}</span>
-      <button class="delete" (click)="delete(); $event.stopProgagation()">x</button>
-    </li>
-  </ul>
+
+  <div *ngIf="selectedGift">
+    <h2>
+      <!--{{selectedGift.description | uppercase}} is the gift-->
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+  </div>
+  <div>
+    <label>Gift Name:</label><input #giftName/>
+    <button class="basic-btn" (click)="add(giftName.value); giftName.value=''">Add</button>
+  </div>
+
+
+  <div fxLayout fxLayout.xs="column" *ngFor="let gift of giftsFirebaseList | async">
+    <!--each gift goes here -->
+    <md-card>
+      <md-card-header>
+        <md-card-title>{{gift.gift}}</md-card-title>
+        <md-card-subtitle>{{gift.description}}</md-card-subtitle>
+      </md-card-header>
+      <img md-card-image class="img-round" src="assets/images/ipad.jpg">
+      <md-card-content>
+        <md-input-container>
+          <input type="text" disabled="true" mdInput placeholder="Desired Rating">
+          <md-slider max="10" min="1" value={{gift.desiredRating}}></md-slider>
+          <md-slide-toggle [(ngModel)]=gift.recieved>Recieved</md-slide-toggle>
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Recieve Time" [(ngModel)]=gift.recieveTime>
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Added Time" [(ngModel)]=gift.addedTime>
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Where to Buy" [(ngModel)]=gift.whereToBuy>
+        </md-input-container>
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button color="primary" class="action-button">Like</button>
+        <button  md-button (click)="delete(); $event.stopProgagation()">delete</button>
+      </md-card-actions>
+    </md-card>
+  </div>
+
   <div *ngIf="selectedGift">
     <h2>
       <!--{{selectedGift.description | uppercase}} is the gift-->
