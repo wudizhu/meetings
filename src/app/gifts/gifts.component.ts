@@ -23,8 +23,9 @@ export class GiftesComponent implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     console.log("loading gifts!");
-
-
+    this.addingGift = false;
+    this.updatingGift = false;
+    this.newGift = new GiftData();
     this.route.params
       .switchMap((params: Params) => this.getGifts(params['person'], 'firebase'))
       .subscribe(gifts => {
@@ -38,12 +39,16 @@ export class GiftesComponent implements OnInit {
   giftsFirebase: FirebaseObjectObservable<any>;
   giftsFirebaseList: FirebaseListObservable<any>;
   selectedGift: Gift;
+  addingGift: boolean;
+  newGift : GiftData;
+  updatingGift: boolean;
 
   constructor(
     // private router: Router,
     private giftService: GiftHttpService,
     private giftFirebaseService: GiftFirebaseService,
-    private route: ActivatedRoute) { };
+    private route: ActivatedRoute) {
+    };
 
 
   getGiftsByPerson(person): FirebaseListObservable<any> {
@@ -77,45 +82,51 @@ export class GiftesComponent implements OnInit {
     }
   }
 
-  onSelect(gift: Gift): void {
-    this.selectedGift = gift;
+  addGift(newGift: GiftData): void {
+    console.log("gift added with the data: " + JSON.stringify(newGift));
+    this.giftFirebaseService.addGift({"added-time": newGift.addedTime,
+                "description": newGift.description,
+                "pictureURL": newGift.pictureURL,
+                "desired-rating": newGift.desiredRating,
+                "recieve-time": newGift.recieveTime,
+                "recieved": newGift.recieved,
+                "where-to-buy": newGift.whereToBuy});
+    this.addingGift = false;
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.giftService.create(name)
-      .then(gift => {
-        this.gifts.push(gift);
-        this.selectedGift = null;
-      });
+  cancel(newGift: GiftData): void {
+    console.log("Canceling adding gift with the data: " + JSON.stringify(newGift));
+    this.addingGift = false;
   }
 
-  delete() {
+  expandAddingGift(): void {
+    this.addingGift = true;
 
   }
 
-  gotoDetail() {
-
+  delete(gift:GiftData) {
+    console.log("Deleting gift with the data: " + JSON.stringify(gift));
+    this.giftFirebaseService.removeGift(gift);
+    this.updatingGift = false;
   }
 
-  get diagnostic() { return JSON.stringify(this.gifts); }
+  updateGift(updateGift: GiftData): void {
+    console.log("Updating gift  with the data: " + JSON.stringify(updateGift.gift));
+    this.giftFirebaseService.updateGift( updateGift.gift,
+                {
+                "added-time": updateGift.addedTime,
+                "description": updateGift.description,
+                "pictureURL": updateGift.pictureURL,
+                "desired-rating": updateGift.desiredRating,
+                "recieve-time": updateGift.recieveTime,
+                "recieved": updateGift.recieved,
+                "where-to-buy": updateGift.whereToBuy
+              });
+    this.updatingGift = false;
+  }
 
-  // getFirebaseGiftesList(person): void {
-  //   this.giftsFirebaseList = this.giftFirebaseService.getGiftesList(person);
-  //   this.giftsFirebaseList.subscribe(gifts => {
-  //     console.log("gift is "+ JSON.stringify(gifts));
-  //     this.gifts = gifts;
-  //   });
-  // }
+  errorHandler(event) {
+    console.log(event);
+  }
 
-  // delete(gift: Gift): void {
-  //   this.giftService
-  //     .delete(gift.desiredrating)
-  //     .then(() => {
-  //       this.gifts = this.gifts.filter(h => h !== gift);
-  //       if (this.selectedGift === gift) { this.selectedGift = null; }
-  //     });
-
-  // }
 }

@@ -11,7 +11,7 @@ export class GiftData {
   constructor(gift: string = "unknown",
   addedTime: string = "2017-01-01",
   description: string = "unkowen",
-  pictureURL: string,
+  pictureURL: string = "Copy the link address of the picture of your gift",
   desiredRating: number = 0,
   recieveTime: string = "unknown",
   recieved: boolean = false,
@@ -25,4 +25,7 @@ export class GiftData {
       this.recieved = recieved;
       this.whereToBuy = whereToBuy;
     }
+
+
+
 }

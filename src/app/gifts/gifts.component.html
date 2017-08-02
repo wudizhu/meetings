@@ -1,17 +1,49 @@
 <div>
-  <h2>Gifts</h2>
 
-  <div *ngIf="selectedGift">
-    <h2>
-      <!--{{selectedGift.description | uppercase}} is the gift-->
-    </h2>
-    <button (click)="gotoDetail()">View Details</button>
+  <div *ngIf="!addingGift">
+    <button (click)="expandAddingGift()" md-raised-button color="primary" class="action-button">Add a New Gift</button>
   </div>
-  <div>
-    <label>Gift Name:</label><input #giftName/>
-    <button class="basic-btn" (click)="add(giftName.value); giftName.value=''">Add</button>
-  </div>
+  <div *ngIf="addingGift">
+    <md-card>
+      <md-card-header fxLayout="column">
+          <md-input-container class = "full-width">
+          <input mdInput #giftName maxlength="256" placeholder="Gift Name" [(ngModel)]=newGift.gift>
+          <md-hint align="end">{{giftName.value.length}} / 256</md-hint>
+        </md-input-container>
+        <md-input-container class = "full-width">
+          <input mdInput #giftDescription maxlength="256" placeholder="Gift Description" [(ngModel)]=newGift.description>
+          <md-hint align="end">{{giftDescription.value.length}} / 256</md-hint>
+        </md-input-container>
+      </md-card-header>
+      <img md-card-image class="gift-img" [src]= newGift.pictureURL (error)="errorHandler($event)">
+      <md-card-content>
+        <md-input-container class = "full-width">
+          <input mdInput #url maxlength="256" placeholder="The link (URL) of the gift picture" [(ngModel)]=newGift.pictureURL>
+          <md-hint align="start"><strong>Don't disclose personal info</strong> </md-hint>
+          <md-hint align="end">{{url.value.length}} / 256</md-hint>
+        </md-input-container>
+        <md-input-container>
+          <input type="text" disabled="true" mdInput placeholder="Desired Rating">
+          <md-slider max="10" min="1" value={{newGift.desiredRating}}></md-slider>
+          <md-slide-toggle [(ngModel)]=newGift.recieved>Recieved</md-slide-toggle>
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Recieve Time" [(ngModel)]=newGift.recieveTime>
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Added Time" [(ngModel)]=newGift.addedTime>
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Where to Buy" [(ngModel)]=newGift.whereToBuy>
+        </md-input-container>
+      </md-card-content>
+      <md-card-actions>
+        <button (click)="addGift(this.newGift)" md-raised-button color="primary" class="action-button">Add</button>
+        <button (click)="cancel(this.newGift)" md-raised-button color="primary" class="action-button">Cancel</button>
+      </md-card-actions>
+    </md-card>
 
+  </div>
 
   <div fxLayout fxLayout.xs="column" *ngFor="let gift of giftsFirebaseList | async">
     <!--each gift goes here -->
@@ -20,7 +52,7 @@
         <md-card-title>{{gift.gift}}</md-card-title>
         <md-card-subtitle>{{gift.description}}</md-card-subtitle>
       </md-card-header>
-      <img md-card-image class="gift-img" [src] = gift.pictureURL>
+      <img md-card-image class="gift-img" [src]=gift.pictureURL>
       <md-card-content>
         <md-input-container>
           <input type="text" disabled="true" mdInput placeholder="Desired Rating">
@@ -38,8 +70,8 @@
         </md-input-container>
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button color="primary" class="action-button">Like</button>
-        <button  md-button (click)="delete(); $event.stopProgagation()">delete</button>
+        <button (click)="updateGift(gift)" md-raised-button color="primary" class="action-button">Update</button>
+        <button md-button (click)="delete(gift)">delete</button>
       </md-card-actions>
     </md-card>
   </div>
