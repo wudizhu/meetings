@@ -31,12 +31,13 @@ export class MembersComponent implements OnInit {
 
   manageGifts(person) {
     console.log(person);
-    this.router.navigate(['/gifts']);
+    this.router.navigate(['/gifts', person]);
   }
+
 
   viewGifts(person) {
     console.log(person);
-    this.router.navigate(['/gifts']);
+    this.router.navigate(['/gifts', person]);
   }
 
 

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 export class GiftFirebaseService {
   constructor(private angularfire: AngularFireDatabase) { }
 
-  getGiftes(person): FirebaseListObservable<any> {
+  getGifts(person): FirebaseListObservable<any> {
     var api = '/gifts/' + person + '/desired-gifts';
     console.log("the firebase object is : " + api);
     return this.angularfire.list(api);

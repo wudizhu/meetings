@@ -28,7 +28,11 @@ const routes: Routes = [
       component: EmailComponent },
     { path: 'members',
       component: MembersComponent, canActivate: [AuthGuard] },
-    { path: 'gifts', component: GiftesComponent},
+    // { path: 'gifts', component: GiftesComponent},
+    {
+      path: 'gifts/:person',
+      component: GiftesComponent
+    },
     { path: 'dashboard', component: DashboardComponent },
     {
       path: 'detail/:id',

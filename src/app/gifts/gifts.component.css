@@ -3,3 +3,8 @@ button.delete-button {
   /* border: 2px solid grey; */
   border-radius: 5px;
 }
+
+img.gift-img  {
+   width: 60%;
+    border-radius: 5%;
+}

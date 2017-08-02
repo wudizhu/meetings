@@ -2,11 +2,12 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
 import { Component, Pipe } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { GiftData } from './giftdata';
-import {Gift} from './gift';
+import { Gift } from './gift';
 import { GiftHttpService } from '../providers/gift.httpService';
 import { GiftFirebaseService } from '../providers/gift.firebaseService';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'gifts',
@@ -23,8 +24,13 @@ export class GiftesComponent implements OnInit {
     //Add 'implements OnInit' to the class.
     console.log("loading gifts!");
 
-    //ToDo: get the person from the members component
-    this.getGiftes(`Hongyan`, 'firebase');
+
+    this.route.params
+      .switchMap((params: Params) => this.getGifts(params['person'], 'firebase'))
+      .subscribe(gifts => {
+        console.log("giftsdata are " + JSON.stringify(gifts));
+        this.giftsdata = gifts;
+      });
   }
 
   gifts: Gift[];
@@ -34,59 +40,46 @@ export class GiftesComponent implements OnInit {
   selectedGift: Gift;
 
   constructor(
-    private router: Router,
+    // private router: Router,
     private giftService: GiftHttpService,
-    private giftFirebaseService: GiftFirebaseService) { };
+    private giftFirebaseService: GiftFirebaseService,
+    private route: ActivatedRoute) { };
 
-  getGiftes(person, service): void {
+
+  getGiftsByPerson(person): FirebaseListObservable<any> {
+
+    return this.getGifts(person, 'firebase');
+  }
+
+  getGifts(person, service): FirebaseListObservable<any> {
     if (service != null) {
       if (service == 'firebase') {
-        this.giftsFirebaseList = <FirebaseListObservable<any>> this.giftFirebaseService.getGiftes(person)
-          .map(items =>  {console.log("raw object is: " +  JSON.stringify(items));
+        this.giftsFirebaseList = <FirebaseListObservable<any>>this.giftFirebaseService.getGifts(person)
+          .map(items => {
+            console.log("raw object is: " + JSON.stringify(items));
             return items.map(item => {
-              console.log("the gift key is: "+ item.$key);
-              let {"added-time": addedTime,
-              "description": description,
-              "desired-rating": desiredRating,
-              "recieve-time": recieveTime,
-              "recieved": recieved,
-              "where-to-buy": whereToBuy
+              console.log("the gift key is: " + item.$key);
+              let { "added-time": addedTime,
+                "description": description,
+                "pictureURL": pictureURL,
+                "desired-rating": desiredRating,
+                "recieve-time": recieveTime,
+                "recieved": recieved,
+                "where-to-buy": whereToBuy
                } = item;
-              console.log(addedTime);
-              let gift= new GiftData(item.$key, addedTime, description, desiredRating, recieveTime, recieved, whereToBuy);
-              console.log(gift);
-              return gift});
+              let gift = new GiftData(item.$key, addedTime, description, pictureURL, desiredRating, recieveTime, recieved, whereToBuy);
+              return gift
+            });
           });
-        this.giftsFirebaseList.subscribe(gifts => {
-          console.log("giftsdata are " + JSON.stringify(gifts));
-          this.giftsdata = gifts;
-        });
-      } else {
-        this.giftService.getGiftes().then(gifts => this.gifts = gifts);
+
+        return this.giftsFirebaseList;
       }
     }
   }
 
-
-
-  get diagnostic() { return JSON.stringify(this.gifts); }
-
-
-  // getFirebaseGiftesList(person): void {
-  //   this.giftsFirebaseList = this.giftFirebaseService.getGiftesList(person);
-  //   this.giftsFirebaseList.subscribe(gifts => {
-  //     console.log("gift is "+ JSON.stringify(gifts));
-  //     this.gifts = gifts;
-  //   });
-  // }
-
   onSelect(gift: Gift): void {
     this.selectedGift = gift;
   }
-
-  // gotoDetail() {
-  //   this.router.navigate(['/detail', this.selectedGift.description);
-  // }
 
   add(name: string): void {
     name = name.trim();
@@ -105,6 +98,16 @@ export class GiftesComponent implements OnInit {
   gotoDetail() {
 
   }
+
+  get diagnostic() { return JSON.stringify(this.gifts); }
+
+  // getFirebaseGiftesList(person): void {
+  //   this.giftsFirebaseList = this.giftFirebaseService.getGiftesList(person);
+  //   this.giftsFirebaseList.subscribe(gifts => {
+  //     console.log("gift is "+ JSON.stringify(gifts));
+  //     this.gifts = gifts;
+  //   });
+  // }
 
   // delete(gift: Gift): void {
   //   this.giftService

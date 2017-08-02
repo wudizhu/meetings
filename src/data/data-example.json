@@ -14,7 +14,8 @@
       "Hongyan": {
             "desired-gifts": {
                 "ipad": {
-                    "description": "iPad",
+                    "description": "iPad 9.7 inch 2017",
+                    "pictureURL": "https://images.apple.com/uk/ipad-9.7/images/overview/compare_ipad_small.jpg",
                     "where-to-buy": "Edinburgh apple store",
                     "added-time": "2017-04-15",
                     "recieve-time" : "in 2018",
@@ -22,7 +23,8 @@
                     "recieved" : true
                 },
               "wok": {
-                    "description": "iPad",
+                    "description": "Cooking wok",
+                    "pictureURL": "",
                     "where-to-buy": "Edinburgh apple store",
                     "added-time": "2017-04-15",
                     "recieve-time" : "in 2018",
@@ -35,7 +37,8 @@
       "Feng": {
             "desired-gifts": {
                 "surface-pro": {
-                    "description": "Surface pro",
+                    "description": "Surface pro 2017",
+                    "pictureURL": "",
                     "where-to-buy": "do not know yet",
                     "added-time": "2017-04-15",
                     "recieve-time" : "in 2020",
@@ -44,6 +47,7 @@
                 },
                 "ipad pro": {
                     "description": "iPad pro 12.9",
+                    "pictureURL": "",
                     "where-to-buy": "Edinburgh apple store",
                     "added-time": "2017-04-15",
                     "recieve-time" : "in 2018",

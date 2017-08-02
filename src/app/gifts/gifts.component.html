@@ -20,7 +20,7 @@
         <md-card-title>{{gift.gift}}</md-card-title>
         <md-card-subtitle>{{gift.description}}</md-card-subtitle>
       </md-card-header>
-      <img md-card-image class="img-round" src="assets/images/ipad.jpg">
+      <img md-card-image class="gift-img" [src] = gift.pictureURL>
       <md-card-content>
         <md-input-container>
           <input type="text" disabled="true" mdInput placeholder="Desired Rating">
@@ -42,16 +42,5 @@
         <button  md-button (click)="delete(); $event.stopProgagation()">delete</button>
       </md-card-actions>
     </md-card>
-  </div>
-
-  <div *ngIf="selectedGift">
-    <h2>
-      <!--{{selectedGift.description | uppercase}} is the gift-->
-    </h2>
-    <button (click)="gotoDetail()">View Details</button>
-  </div>
-  <div>
-    <label>Gift Name:</label><input #giftName/>
-    <button class="basic-btn" (click)="add(giftName.value); giftName.value=''">Add</button>
   </div>
 </div>
