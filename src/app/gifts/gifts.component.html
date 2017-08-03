@@ -6,20 +6,21 @@
   <div *ngIf="addingGift">
     <md-card>
       <md-card-header fxLayout="column">
-          <md-input-container class = "full-width">
+        <md-input-container class="full-width">
           <input mdInput #giftName maxlength="256" placeholder="Gift Name" [(ngModel)]=newGift.gift>
+          <md-hint align="start"><strong>The name cannot be changed once created</strong> </md-hint>
           <md-hint align="end">{{giftName.value.length}} / 256</md-hint>
         </md-input-container>
-        <md-input-container class = "full-width">
+        <md-input-container class="full-width">
           <input mdInput #giftDescription maxlength="256" placeholder="Gift Description" [(ngModel)]=newGift.description>
           <md-hint align="end">{{giftDescription.value.length}} / 256</md-hint>
         </md-input-container>
       </md-card-header>
-      <img md-card-image class="gift-img" [src]= newGift.pictureURL (error)="errorHandler($event)">
+      <img md-card-image class="gift-img" [src]=newGift.pictureURL (error)="errorHandler($event)">
       <md-card-content>
-        <md-input-container class = "full-width">
+        <md-input-container class="full-width">
           <input mdInput #url maxlength="256" placeholder="The link (URL) of the gift picture" [(ngModel)]=newGift.pictureURL>
-          <md-hint align="start"><strong>Don't disclose personal info</strong> </md-hint>
+          <md-hint align="start"><strong>Test if link works by checking the displayed picture</strong> </md-hint>
           <md-hint align="end">{{url.value.length}} / 256</md-hint>
         </md-input-container>
         <md-input-container>
@@ -48,11 +49,41 @@
   <div fxLayout fxLayout.xs="column" *ngFor="let gift of giftsFirebaseList | async">
     <!--each gift goes here -->
     <md-card>
-      <md-card-header>
-        <md-card-title>{{gift.gift}}</md-card-title>
-        <md-card-subtitle>{{gift.description}}</md-card-subtitle>
+      <md-card-header fxLayout="column">
+        <md-input-container class="full-width" *ngIf="editingGift.Title">
+          <input mdInput #giftName maxlength="256" placeholder="Gift Name" [(ngModel)]=gift.gift>
+          <md-icon mdSuffix (click)="editSwitchTitle(false)">done</md-icon>
+          <md-hint align="end">{{giftName.value.length}} / 256</md-hint>
+        </md-input-container>
+        <div *ngIf="!editingGift.Title">
+          <md-card-title>{{gift.gift}}</md-card-title>
+        </div>
+        <md-input-container class="full-width" *ngIf="editingGift.Description">
+          <input mdInput #giftDescription maxlength="256" placeholder="Gift Description" [(ngModel)]=gift.description>
+          <md-icon mdSuffix (click)="editSwitchDescription(false)">done</md-icon>
+          <md-hint align="end">{{giftDescription.value.length}} / 256</md-hint>
+        </md-input-container>
+        <div *ngIf="!editingGift.Description">
+          <md-card-subtitle>{{gift.description}}<span mdSuffix>&nbsp;</span>
+            <md-icon mdSuffix (click)="editSwitchDescription(true)">mode_edit</md-icon>
+          </md-card-subtitle>
+        </div>
       </md-card-header>
+
+
+
       <img md-card-image class="gift-img" [src]=gift.pictureURL>
+      <span *ngIf="!editingGift.PictureURL">
+        <span mdSuffix>&nbsp;</span>
+        <md-icon mdSuffix (click)="editSwitchPictureURL(true)">mode_edit</md-icon>
+      </span>
+      <md-input-container class="full-width" *ngIf="editingGift.PictureURL">
+        <input mdInput #url maxlength="256" placeholder="The link (URL) of the gift picture" [(ngModel)]=gift.pictureURL>
+        <md-icon mdSuffix (click)="editSwitchPictureURL(false)">done</md-icon>
+        <md-hint align="start"><strong>Test if link works by checking the displayed picture</strong> </md-hint>
+        <md-hint align="end">{{url.value.length}} / 256</md-hint>
+      </md-input-container>
+
       <md-card-content>
         <md-input-container>
           <input type="text" disabled="true" mdInput placeholder="Desired Rating">
