@@ -40,6 +40,9 @@ export class MembersComponent implements OnInit {
     this.router.navigate(['/gifts', person]);
   }
 
+  log() {
+    console.log("the mouse over event is fired");
+  }
 
   ngOnInit() {
   }
