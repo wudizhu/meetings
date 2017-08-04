@@ -1,3 +1,4 @@
+import { Logger } from './../providers/logger.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class MembersComponent implements OnInit {
   name: any;
 
-  constructor(public angularfire: AngularFireAuth, private router: Router) {
+  constructor(public angularfire: AngularFireAuth, private router: Router, private logger: Logger) {
 
     this.angularfire.authState.subscribe(auth => {
       if(auth) {
@@ -25,23 +26,23 @@ export class MembersComponent implements OnInit {
 
   logout() {
      this.angularfire.auth.signOut();
-     console.log('logged out');
+     this.logger.log('logged out');
      this.router.navigate(['/login']);
   }
 
   manageGifts(person) {
-    console.log(person);
+    this.logger.log(person);
     this.router.navigate(['/gifts', person]);
   }
 
 
   viewGifts(person) {
-    console.log(person);
+    this.logger.log(person);
     this.router.navigate(['/gifts', person]);
   }
 
   log() {
-    console.log("the mouse over event is fired");
+    this.logger.log("the mouse over event is fired");
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Hero } from './Hero';
+import { Logger } from './../providers/logger.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -26,7 +26,7 @@ export class EmailComponent {
   // emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
 
 
-  constructor(public af: AngularFireAuth, private router: Router) {
+  constructor(public af: AngularFireAuth, private router: Router, private logger: Logger) {
       this.welcome = "Welcome to Gifts";
       this.af.authState.subscribe(auth => {
         if(auth) {
@@ -36,8 +36,8 @@ export class EmailComponent {
     }
 
   onSubmit(form: NgForm) {
-    console.log(form.controls);
-    console.log(form.valid);
+    this.logger.log(form.controls);
+    this.logger.log(form.valid);
   }
 
   // // TODO: Remove this when we're done
@@ -45,19 +45,19 @@ export class EmailComponent {
 
   /*Login if the credentials are valid*/
   onLogingSubmit(formData) {
-    console.log(formData);
-    console.log(formData.value.email,formData.value.password);
+    this.logger.log(formData);
+    this.logger.log(formData.value.email,formData.value.password);
     if(formData.valid) {
-      console.log("connecting to the server...");
+      this.logger.log("connecting to the server...");
       this.af.auth.signInWithEmailAndPassword(
         formData.value.email,
         formData.value.password).then(
         (success) => {
-        console.log(success);
+        this.logger.log(success);
         this.router.navigate(['/members']);
       }).catch(
         (err) => {
-        console.log(err);
+        this.logger.log(err);
         this.error = err;
       })
     }

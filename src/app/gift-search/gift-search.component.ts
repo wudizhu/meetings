@@ -1,3 +1,4 @@
+import { Logger } from './../providers/logger.service';
 import { Component, OnInit} from '@angular/core';
 import { Gift } from '../gifts/gift';
 import {GiftSearchService} from '../providers/gift-search.service';
@@ -26,7 +27,8 @@ export class GiftSearchComponent implements OnInit {
 
   constructor(
       private giftSearchService:GiftSearchService,
-      private router:Router
+      private router:Router,
+      private logger: Logger
     ) {}
 
     search(term: string): void {
@@ -41,7 +43,7 @@ export class GiftSearchComponent implements OnInit {
             ? this.giftSearchService.search(term)
             :Observable.of<Gift[]>([])
         )
-        .catch(error => {console.log(error);
+        .catch(error => {this.logger.log(error);
                 return Observable.of<Gift[]>([]);
     });
 

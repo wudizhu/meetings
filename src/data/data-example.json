@@ -1,60 +1,62 @@
 {
-    "users": {
-      "Hongyan": {
-          "name": "Hongyan",
-          "hobby": "cooking"
-        },
-      "Feng": {
-          "name": "Feng",
-          "hobby": "gaming"
-        }
+  "users": {
+    "Hongyan": {
+      "name": "Hongyan",
+      "hobby": "cooking"
     },
-
-    "gifts": {
-      "Hongyan": {
-            "desired-gifts": {
-                "ipad": {
-                    "description": "iPad 9.7 inch 2017",
-                    "pictureURL": "https://images.apple.com/uk/ipad-9.7/images/overview/compare_ipad_small.jpg",
-                    "where-to-buy": "Edinburgh apple store",
-                    "added-time": "2017-04-15",
-                    "recieve-time" : "in 2018",
-                    "desired-rating" : 9,
-                    "recieved" : true
-                },
-              "wok": {
-                    "description": "Cooking wok",
-                    "pictureURL": "",
-                    "where-to-buy": "Edinburgh apple store",
-                    "added-time": "2017-04-15",
-                    "recieve-time" : "in 2018",
-                    "desired-rating" : 7,
-                    "recieved" : false
-                  }
-            }
-
-      },
-      "Feng": {
-            "desired-gifts": {
-                "surface-pro": {
-                    "description": "Surface pro 2017",
-                    "pictureURL": "",
-                    "where-to-buy": "do not know yet",
-                    "added-time": "2017-04-15",
-                    "recieve-time" : "in 2020",
-                    "desired-rating" : 6,
-                    "recieved" : false
-                },
-                "ipad pro": {
-                    "description": "iPad pro 12.9",
-                    "pictureURL": "",
-                    "where-to-buy": "Edinburgh apple store",
-                    "added-time": "2017-04-15",
-                    "recieve-time" : "in 2018",
-                    "desired-rating" : 9,
-                    "recieved" : true
-                }
-            }
+    "Feng": {
+      "name": "Feng",
+      "hobby": "gaming"
+    }
+  },
+  "gifts": {
+    "Hongyan": {
+      "desired-gifts": {
+        "ipad": {
+          "name": "ipad",
+          "description": "iPad 9.7 inch 2017",
+          "pictureURL": "https://images.apple.com/uk/ipad-9.7/images/overview/compare_ipad_small.jpg",
+          "where-to-buy": "Edinburgh apple store",
+          "added-time": "2017-04-15",
+          "recieve-time": "in 2018",
+          "desired-rating": 9,
+          "recieved": true
+        },
+        "wok": {
+          "name": "wok",
+          "description": "Cooking wok",
+          "pictureURL": "",
+          "where-to-buy": "Edinburgh apple store",
+          "added-time": "2017-04-15",
+          "recieve-time": "in 2018",
+          "desired-rating": 7,
+          "recieved": false
+        }
+      }
+    },
+    "Feng": {
+      "desired-gifts": {
+        "surface-pro": {
+          "name": "surface pro",
+          "description": "Surface pro 2017",
+          "pictureURL": "",
+          "where-to-buy": "do not know yet",
+          "added-time": "2017-04-15",
+          "recieve-time": "in 2020",
+          "desired-rating": 6,
+          "recieved": false
+        },
+        "ipad pro": {
+          "name": "ipad pro",
+          "description": "iPad pro 12.9",
+          "pictureURL": "",
+          "where-to-buy": "Edinburgh apple store",
+          "added-time": "2017-04-15",
+          "recieve-time": "in 2018",
+          "desired-rating": 9,
+          "recieved": true
+        }
       }
     }
+  }
 }

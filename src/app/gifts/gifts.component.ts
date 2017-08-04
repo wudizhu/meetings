@@ -1,3 +1,4 @@
+// import { Logger } from './../providers/logger.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Component, Pipe } from '@angular/core';
 import { OnInit } from '@angular/core';
@@ -8,6 +9,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { GiftStatus } from './gift-status'
+import { Logger } from "app/providers/logger.service";
+
+
 
 @Component({
   selector: 'gifts',
@@ -22,7 +26,7 @@ export class GiftesComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    console.log("loading gifts!");
+    this.logger.log("loading gifts!");
     this.addingGift = false;
     this.editingGift.Title = false;
     this.editingGift.Description = false;
@@ -31,7 +35,7 @@ export class GiftesComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.getGifts(params['person'], 'firebase'))
       .subscribe(gifts => {
-        console.log("giftsdata are " + JSON.stringify(gifts));
+        this.logger.log("giftsdata are " + JSON.stringify(gifts));
         this.giftsdata = gifts;
       });
   }
@@ -51,7 +55,8 @@ export class GiftesComponent implements OnInit {
     // private router: Router,
     private giftService: GiftHttpService,
     private giftFirebaseService: GiftFirebaseService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private logger: Logger) {
   };
 
 
@@ -65,10 +70,12 @@ export class GiftesComponent implements OnInit {
       if (service == 'firebase') {
         this.giftsFirebaseList = <FirebaseListObservable<any>>this.giftFirebaseService.getGifts(person)
           .map(items => {
-            console.log("raw object is: " + JSON.stringify(items));
+            this.logger.log("raw object is: " + JSON.stringify(items));
             return items.map(item => {
-              console.log("the gift key is: " + item.$key);
-              let { "added-time": addedTime,
+              this.logger.log("the gift key is: " + item.$key);
+              let {
+                "name": name,
+                "added-time": addedTime,
                 "description": description,
                 "pictureURL": pictureURL,
                 "desired-rating": desiredRating,
@@ -76,7 +83,7 @@ export class GiftesComponent implements OnInit {
                 "recieved": recieved,
                 "where-to-buy": whereToBuy
                } = item;
-              let gift = new GiftData(item.$key, addedTime, description, pictureURL, desiredRating, recieveTime, recieved, whereToBuy);
+              let gift = new GiftData(item.$key, name, addedTime, description, pictureURL, desiredRating, recieveTime, recieved, whereToBuy);
               return gift
             });
           });
@@ -87,8 +94,9 @@ export class GiftesComponent implements OnInit {
   }
 
   addGift(newGift: GiftData): void {
-    console.log("gift added with the data: " + JSON.stringify(newGift));
+    this.logger.log("gift added with the data: " + JSON.stringify(newGift));
     this.giftFirebaseService.addGift({
+      "name": newGift.name,
       "added-time": newGift.addedTime,
       "description": newGift.description,
       "pictureURL": newGift.pictureURL,
@@ -101,7 +109,7 @@ export class GiftesComponent implements OnInit {
   }
 
   cancel(newGift: GiftData): void {
-    console.log("Canceling adding gift with the data: " + JSON.stringify(newGift));
+    this.logger.log("Canceling adding gift with the data: " + JSON.stringify(newGift));
     this.addingGift = false;
   }
 
@@ -114,29 +122,30 @@ export class GiftesComponent implements OnInit {
     this.editingGift = status;
   }
 
-  editSwitchTitle(title: boolean) :void {
+  editSwitchTitle(title: boolean): void {
     this.editingGift.Title = title
   }
 
-  editSwitchDescription(description: boolean) :void {
+  editSwitchDescription(description: boolean): void {
     this.editingGift.Description = description
   }
 
-  editSwitchPictureURL(pictureURL: boolean) :void {
+  editSwitchPictureURL(pictureURL: boolean): void {
     this.editingGift.PictureURL = pictureURL
   }
 
 
 
   delete(gift: GiftData) {
-    console.log("Deleting gift with the data: " + JSON.stringify(gift));
+    this.logger.log("Deleting gift with the data: " + JSON.stringify(gift));
     this.giftFirebaseService.removeGift(gift);
   }
 
   updateGift(updateGift: GiftData): void {
-    console.log("Updating gift  with the data: " + JSON.stringify(updateGift.gift));
-    this.giftFirebaseService.updateGift(updateGift.gift,
+    this.logger.log("Updating gift  with the data: " + JSON.stringify(updateGift.key));
+    this.giftFirebaseService.updateGift(updateGift.key,
       {
+        "name": updateGift.name,
         "added-time": updateGift.addedTime,
         "description": updateGift.description,
         "pictureURL": updateGift.pictureURL,
@@ -154,7 +163,7 @@ export class GiftesComponent implements OnInit {
   }
 
   errorHandler(event) {
-    console.log(event);
+    this.logger.log(event);
   }
 
 }
