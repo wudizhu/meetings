@@ -31,50 +31,55 @@ import { KeysPipe } from './pipes/objects.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 
-
-
-describe('AppComponent', () => {
-  beforeEach(async(() => {
-    const firebaseConfig = {
-      firebase: {
-        apiKey: "AIzaSyBZ6Z0j0q3ICT69URZYFpMhv2Q0FgM1DLg",
-        authDomain: "giftslist-bf2f8.firebaseapp.com",
-        databaseURL: "https://giftslist-bf2f8.firebaseio.com",
-        storageBucket: "giftslist-bf2f8.appspot.com",
-        messagingSenderId: "668847751266"
-      }
-    };
-    TestBed.configureTestingModule({
-      imports: [MaterialModule, AppRoutingModule, FormsModule, RouterTestingModule, AngularFireModule.initializeApp(firebaseConfig.firebase)],
-      declarations: [
-        AppComponent, EmailComponent, SignupComponent, LoginComponent, MembersComponent,
-        PageNotFoundComponent,
-        DashboardComponent,
-        GiftDetailComponent,
-        GiftSearchComponent,
-        GiftesComponent,
-        KeysPipe
-      ],
-      providers: [AuthGuard, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],
-    }).compileComponents();
-  }));
-
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  // it(`should have as title 'app works!'`, async(() => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual('app works!');
-  // }));
-
-  // it('should render title in a h1 tag', async(() => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  // }));
+describe('1st tests', () => {
+  it('true is true', () => expect(true).toBe(false));
 });
+
+// describe('AppComponent', () => {
+//   beforeEach(async(() => {
+//     const firebaseConfig = {
+//       firebase: {
+//         apiKey: "AIzaSyBZ6Z0j0q3ICT69URZYFpMhv2Q0FgM1DLg",
+//         authDomain: "giftslist-bf2f8.firebaseapp.com",
+//         databaseURL: "https://giftslist-bf2f8.firebaseio.com",
+//         storageBucket: "giftslist-bf2f8.appspot.com",
+//         messagingSenderId: "668847751266"
+//       }
+//     };
+//     TestBed.configureTestingModule({
+//       declarations: [
+//         AppComponent,
+//         LoginComponent,
+//         EmailComponent,
+//         SignupComponent,
+//         MembersComponent,
+//         PageNotFoundComponent,
+//         DashboardComponent,
+//         GiftDetailComponent,
+//         GiftSearchComponent,
+//         GiftesComponent,
+//         KeysPipe
+//       ],
+//       imports: [
+//         BrowserModule,
+//         BrowserAnimationsModule,
+//         FormsModule,
+//         ReactiveFormsModule,
+//         HttpModule,
+//         InMemoryWebApiModule.forRoot(InMemoryDataService),
+//         AngularFireModule.initializeApp(firebaseConfig.firebase),
+//         AppRoutingModule,
+//         MdButtonModule,
+//         MdCardModule,
+//         MdMenuModule,
+//         MdToolbarModule,
+//         MdIconModule,
+//         MdInputModule,
+//         MdSliderModule,
+//         MdSlideToggleModule,
+//         FlexLayoutModule
+//       ],
+//       providers: [AuthGuard, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],
+//     }).compileComponents();
+//   }));
+// });
