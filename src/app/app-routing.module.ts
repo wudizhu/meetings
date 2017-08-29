@@ -28,7 +28,6 @@ const routes: Routes = [
       component: EmailComponent },
     { path: 'members',
       component: MembersComponent, canActivate: [AuthGuard] },
-    // { path: 'gifts', component: GiftesComponent},
     {
       path: 'gifts/:person',
       component: GiftesComponent
@@ -41,30 +40,6 @@ const routes: Routes = [
     { path: '**', component: PageNotFoundComponent },
 
 ]
-
-// const routes: Routes = [
-//     {
-//       path: '',
-//       component: HomePageComponent
-//     },
-//     {
-//       path: 'login',
-//       component: AppComponent
-//     },
-//     {
-//       path: 'gifts',
-//       component: GiftesComponent
-//     },
-//     {
-//       path: 'dashboard',
-//       component: DashboardComponent
-//     },
-//     {
-//       path: 'detail/:id',
-//       component: GiftDetailComponent
-//     }
-
-// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

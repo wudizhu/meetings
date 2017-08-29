@@ -1,7 +1,5 @@
-import { Logger } from './../providers/logger.service';
+import { Logger } from 'app/providers/logger.service';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireModule} from 'angularfire2';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { FormControl, Validators, NgForm, FormsModule } from '@angular/forms';
