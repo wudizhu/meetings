@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
 import { MembersComponent } from './members/members.component';
-import { AuthGuard } from './providers/auth.service';
+import { AuthGuard, AuthService } from './providers/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -73,7 +73,7 @@ export const firebaseConfig = {
     MdSlideToggleModule,
     FlexLayoutModule
   ],
-  providers: [AuthGuard, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],
+  providers: [AuthGuard, AuthService, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule {

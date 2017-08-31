@@ -1,6 +1,6 @@
+import { AuthService } from 'app/providers/auth.service';
 import { Logger } from 'app/providers/logger.service';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { FormControl, Validators, NgForm, FormsModule } from '@angular/forms';
 
@@ -24,14 +24,12 @@ export class EmailComponent {
   // emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
 
 
-  constructor(public af: AngularFireAuth, private router: Router, private logger: Logger) {
-      this.welcome = "Welcome to Gifts";
-      this.af.authState.subscribe(auth => {
-        if(auth) {
-          this.router.navigateByUrl('/members');
-        }
-      });
+  constructor(private auth: AuthService, private router: Router, private logger: Logger) {
+    this.welcome = "Welcome to Gifts";
+    if (this.auth.isAuthenticated) {
+      this.router.navigateByUrl('/members');
     }
+  }
 
   onSubmit(form: NgForm) {
     this.logger.log(form.controls);
@@ -44,20 +42,30 @@ export class EmailComponent {
   /*Login if the credentials are valid*/
   onLogingSubmit(formData) {
     this.logger.log(formData);
-    this.logger.log(formData.value.email,formData.value.password);
-    if(formData.valid) {
-      this.logger.log("connecting to the server...");
-      this.af.auth.signInWithEmailAndPassword(
-        formData.value.email,
-        formData.value.password).then(
-        (success) => {
-        this.logger.log(success);
-        this.router.navigate(['/members']);
-      }).catch(
-        (err) => {
-        this.logger.log(err);
-        this.error = err;
-      })
+    this.logger.log(formData.value.email, formData.value.password);
+    if (formData.valid) {
+      //Only login if the user is not authenticated
+      //if the user is authenticated, then she must first logout
+      if (!this.auth.isAuthenticated) {
+        this.logger.log("connecting to the server...");
+        this.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password)
+          .then((data) => { this.logger.log("Promise resolve recieved",data); },
+          (err) => { this.logger.log("Promise reject recieved",err);}
+        )
+        // this.logger.log(loginSuccess);
+        // if (loginSuccess) {
+        //   this.logger.log("Login success, navigating to members");
+        //   this.router.navigateByUrl('/members');
+        // } else {
+        //   this.logger.log("Login failed! Let's show some feedback!");
+        //   //to be implemented, show feedback to user after login failed.
+        // }
+
+      } else {
+        this.logger.log("Only login if the user is not authenticated, if the user is authenticated, then she must first logout");
+
+      }
+
     }
   }
 }
