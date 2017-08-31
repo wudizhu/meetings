@@ -49,7 +49,9 @@ export class EmailComponent {
       if (!this.auth.isAuthenticated) {
         this.logger.log("connecting to the server...");
         this.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password)
-          .then((data) => { this.logger.log("Promise resolve recieved",data); },
+          .then(
+            (data) => { this.logger.log("Promise resolve recieved",data);
+                        this.router.navigateByUrl('/members'); },
           (err) => { this.logger.log("Promise reject recieved",err);}
         )
         // this.logger.log(loginSuccess);
