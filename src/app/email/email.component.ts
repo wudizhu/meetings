@@ -19,7 +19,7 @@ export class EmailComponent {
   welcome: string;
   email: string = "";
   password: string = "";
-  feng: string;
+
   // formControl = new FormControl('', Validators.required);
   // emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
 
@@ -31,10 +31,6 @@ export class EmailComponent {
     }
   }
 
-  onSubmit(form: NgForm) {
-    this.logger.log(form.controls);
-    this.logger.log(form.valid);
-  }
 
   // // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.email + "||" + this.password); }

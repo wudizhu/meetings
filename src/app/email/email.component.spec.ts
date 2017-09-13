@@ -1,31 +1,46 @@
-import { Observable } from 'rxjs/Rx';
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from "@angular/core";
-import { By } from "@angular/platform-browser";
-import { RouterTestingModule } from '@angular/router/testing';
-import { NgModule, animate } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { AngularFireAuth } from 'angularfire2/auth';
+import {
+    MdButtonModule,
+    MdCardModule,
+    MdIconModule,
+    MdInputModule,
+    MdMenuModule,
+    MdSliderModule,
+    MdSlideToggleModule,
+    MdToolbarModule,
+} from '@angular/material';
+import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { EmailComponent } from 'app/email/email.component';
-import { MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MaterialModule } from '@angular/material';
-import { OverlayContainer } from '@angular/material';
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { Router } from "@angular/router";
 import { Logger } from 'app/providers/logger.service';
 import * as firebase from 'firebase/app';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { Observable } from 'rxjs/Rx';
+
+import { AuthService } from './../providers/auth.service';
+
+// import { AngularFireAuth } from 'angularfire2/auth';
 
 
+// const authState: firebase.User = null;
 
-const authState: firebase.User = null;
-const AngularFireAuthMocks = {authState : Observable.of(authState)};
+const authState = {
+  isAnonymous: false,
+  uid: '17WvU2Vj58SnTz8v7EqyYYb0WRc2'
+} as firebase.User;
+
+const AuthServiceMocks = {authState : Observable.of(authState)};
+
 describe('EmailComponent', () => {
 
   let mockRouter:any;
   let component: EmailComponent;
   let fixture: ComponentFixture<EmailComponent>;
   let debugElement: DebugElement;
+  let loginButton: HTMLButtonElement;
   let element: HTMLElement;
   let authService: any;
 
@@ -35,8 +50,8 @@ describe('EmailComponent', () => {
     TestBed.configureTestingModule({
       declarations: [EmailComponent],
       providers: [{
-        provide: AngularFireAuth,
-        useValue: AngularFireAuthMocks
+        provide: AuthService,
+        useValue: AuthServiceMocks
       }, {provide: Router,
          useValue: mockRouter}, Logger],
       imports: [
@@ -60,11 +75,13 @@ describe('EmailComponent', () => {
    () => {
   fixture = TestBed.createComponent(EmailComponent);
   component = fixture.componentInstance;
-  authService = fixture.debugElement.injector.get(AngularFireAuth);
+  authService = fixture.debugElement.injector.get(AuthService);
   debugElement = fixture.debugElement.query(By.css('md-card-title'));
   element = debugElement.nativeElement;
+  loginButton = fixture.debugElement.query(By.css('#LoginButton')).nativeElement;
  })
 
+  //check the page before loading
   it("should display no title before component is loaded", ()=> {
         expect(element.textContent).toEqual('');
   });
@@ -74,11 +91,29 @@ describe('EmailComponent', () => {
         expect(element.textContent).toEqual(component.welcome);
   });
 
-  //mock the auth service
-  it('should not authenticate before login', ()=> {
+  //sanity check for mock service
+  it('should define authentication service', ()=> {
     fixture.detectChanges();
     expect(authService).toBeDefined();
   })
+
+  //Test the logic of submit function
+  it('should disable the login if either user or password is invalid', ()=> {
+    //arrange
+    component.email = 'abc';
+    component.password = 'abc';
+    //act
+    fixture.detectChanges();
+    //assert
+    expect(loginButton.disabled).toBeTruthy("Login disabled if inputs are invalid");
+  })
+
+  //Test the validation of the user and password
+
+
+  //Test if the button is disabled when loginform is disabled.
+  //Shoule we test this because it is the angular attribute directive
+  //the part if the loginform is disabled then button is disabled is our own logic
 
 
 });

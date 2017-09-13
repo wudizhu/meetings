@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
 export class AuthService {
   private authState: firebase.User;
 
-  constructor(private angularFireAuth: AngularFireAuth, public logger: Logger, private router: Router) { this.init(); }
+  constructor(private angularFireAuth: AngularFireAuth, public logger: Logger) { this.init(); }
 
   private init(): void {
     this.angularFireAuth.authState.subscribe((authState) => {
