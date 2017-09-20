@@ -8,8 +8,7 @@
       <!--{{diagnostic}}-->
       <form #LoginForm="ngForm" (ngSubmit)="onLogingSubmit(LoginForm)">
         <md-input-container>
-          <input mdInput type="email" placeholder="Email" name="email"  [(ngModel)]="this.email" required
-            pattern= "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+          <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="this.email" required id=userEmail pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
           <md-error>
             Please provide an vaild email address, e.g, abc@d.com
           </md-error>
@@ -17,7 +16,8 @@
         <br>
         <br>
         <md-input-container>
-          <input mdInput type="password" placeholder="Password" [(ngModel)]="this.password" name="password"  required minlength=6 maxlength=20>
+          <input mdInput type="password" placeholder="Password" [(ngModel)]="this.password" name="password" id=password required minlength=6
+            maxlength=20>
           <md-error>
             Password must be at least 6 characters long.
           </md-error>
@@ -25,14 +25,18 @@
         <br>
         <br>
         <md-card-actions>
+
           <button [disabled]="!LoginForm.form.valid" md-raised-button color="primary" id="LoginButton" class="login-button">Log in</button>
+
+          <md-error *ngIf="error" class="card-error">
+            {{ error }}
+          </md-error>
+
         </md-card-actions>
       </form>
     </div>
+
     <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
-    <md-card-footer>
-      <span class="error" *ngIf="error">{{ error }}</span>
-    </md-card-footer>
     <a href="http://www.freepik.com/free-photos-vectors/christmas">
       <h6>Christmas vector created by Freepik</h6>
     </a>

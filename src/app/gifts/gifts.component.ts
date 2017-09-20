@@ -28,8 +28,6 @@ export class GiftesComponent implements OnInit {
     //Add 'implements OnInit' to the class.
     this.logger.log("loading gifts!");
     this.addingGift = false;
-    this.editingGift.Title = false;
-    this.editingGift.Description = false;
     this.editingGift.PictureURL = false;
     this.newGift = new GiftData();
     this.route.params
@@ -122,14 +120,6 @@ export class GiftesComponent implements OnInit {
     this.editingGift = status;
   }
 
-  editSwitchTitle(title: boolean): void {
-    this.editingGift.Title = title
-  }
-
-  editSwitchDescription(description: boolean): void {
-    this.editingGift.Description = description
-  }
-
   editSwitchPictureURL(pictureURL: boolean): void {
     this.editingGift.PictureURL = pictureURL
   }
@@ -156,8 +146,6 @@ export class GiftesComponent implements OnInit {
       });
     //reset editing status after update
     this.editSwitch({
-      Title: false,
-      Description: false,
       PictureURL: false
     });
   }

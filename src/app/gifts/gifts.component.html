@@ -6,36 +6,42 @@
   <div *ngIf="addingGift">
     <md-card>
       <md-card-header fxLayout="column">
-        <md-input-container class="full-width">
+        <md-input-container class="full-width word-wrap">
           <input mdInput #giftName maxlength="256" placeholder="Gift Name" [(ngModel)]=newGift.name>
           <md-hint align="end">{{giftName.value.length}} / 256</md-hint>
         </md-input-container>
-        <md-input-container class="full-width">
-          <input mdInput #giftDescription maxlength="256" placeholder="Gift Description" [(ngModel)]=newGift.description>
-          <md-hint align="end">{{giftDescription.value.length}} / 256</md-hint>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput #giftDescription maxlength="2000" placeholder="Gift Description"
+            [(ngModel)]=newGift.description></textarea>
+          <md-hint align="end">{{giftDescription.value.length}} / 2000</md-hint>
         </md-input-container>
       </md-card-header>
       <img md-card-image class="gift-img" [src]=newGift.pictureURL (error)="errorHandler($event)">
       <md-card-content>
-        <md-input-container class="full-width">
-          <input mdInput #url maxlength="256" placeholder="The link (URL) of the gift picture" [(ngModel)]=newGift.pictureURL>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput #url maxlength="2000" placeholder="The link (URL) of the gift picture"
+            [(ngModel)]=newGift.pictureURL></textarea>
+          <md-icon mdSuffix (click)="editSwitchPictureURL(false)">done</md-icon>
           <md-hint align="start"><strong>Test if link works by checking the displayed picture</strong> </md-hint>
-          <md-hint align="end">{{url.value.length}} / 256</md-hint>
+          <md-hint align="end">{{url.value.length}} / 2000</md-hint>
         </md-input-container>
         <md-input-container>
-          <input type="text" disabled="true" mdInput placeholder="Desired Rating">
-          <md-slider max="10" min="1" value={{newGift.desiredRating}}></md-slider>
-          <md-slide-toggle [(ngModel)]=newGift.recieved>Recieved</md-slide-toggle>
+           <input type="text" disabled="true" mdInput placeholder="Desired Rating">
+          <md-slider class="full-width" max="10" min="1" value={{newGift.desiredRating}}></md-slider>
         </md-input-container>
-        <md-input-container>
-          <input mdInput placeholder="Recieve Time" [(ngModel)]=newGift.recieveTime>
-        </md-input-container>
+        <br>
         <md-input-container>
           <input mdInput placeholder="Added Time" [(ngModel)]=newGift.addedTime>
         </md-input-container>
-        <md-input-container>
-          <input mdInput placeholder="Where to Buy" [(ngModel)]=newGift.whereToBuy>
+        <br>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput placeholder="Where to Buy" [(ngModel)]=newGift.whereToBuy> </textarea>
         </md-input-container>
+        <br>
+        <md-input-container>
+          <input mdInput placeholder="Recieve Time" [(ngModel)]=newGift.recieveTime>
+        </md-input-container>
+        <md-slide-toggle [(ngModel)]=newGift.recieved>Recieved</md-slide-toggle>
       </md-card-content>
       <md-card-actions>
         <button (click)="addGift(this.newGift)" md-raised-button color="primary" class="action-button">Add</button>
@@ -49,55 +55,47 @@
     <!--each gift goes here -->
     <md-card>
       <md-card-header fxLayout="column">
-        <md-input-container class="full-width" *ngIf="editingGift.Title">
+        <md-input-container class="full-width word-wrap">
           <input mdInput #giftName maxlength="256" placeholder="Gift Name" [(ngModel)]=gift.name>
-          <md-icon mdSuffix (click)="editSwitchTitle(false)">done</md-icon>
           <md-hint align="end">{{giftName.value.length}} / 256</md-hint>
         </md-input-container>
-        <div *ngIf="!editingGift.Title">
-          <md-card-title>{{gift.name}}
-            <span mdSuffix>&nbsp;</span>
-            <md-icon mdSuffix (click)="editSwitchTitle(true)">mode_edit</md-icon>
-          </md-card-title>
-        </div>
-        <md-input-container class="full-width" *ngIf="editingGift.Description">
-          <input mdInput #giftDescription maxlength="256" placeholder="Gift Description" [(ngModel)]=gift.description>
-          <md-icon mdSuffix (click)="editSwitchDescription(false)">done</md-icon>
-          <md-hint align="end">{{giftDescription.value.length}} / 256</md-hint>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput #giftDescription maxlength="2000" placeholder="Gift Description"
+            [(ngModel)]=gift.description></textarea>
+          <md-hint align="end">{{giftDescription.value.length}} / 2000</md-hint>
         </md-input-container>
-        <div *ngIf="!editingGift.Description">
-          <md-card-subtitle>{{gift.description}}<span mdSuffix>&nbsp;</span>
-            <md-icon mdSuffix (click)="editSwitchDescription(true)">mode_edit</md-icon>
-          </md-card-subtitle>
-        </div>
       </md-card-header>
       <img md-card-image class="gift-img" [src]=gift.pictureURL>
       <span *ngIf="!editingGift.PictureURL">
         <span mdSuffix>&nbsp;</span>
-        <md-icon mdSuffix (click)="editSwitchPictureURL(true)">mode_edit</md-icon>
+      <md-icon mdSuffix (click)="editSwitchPictureURL(true)">mode_edit</md-icon>
       </span>
-      <md-input-container class="full-width" *ngIf="editingGift.PictureURL">
-        <input mdInput #url maxlength="256" placeholder="The link (URL) of the gift picture" [(ngModel)]=gift.pictureURL>
+      <md-input-container class="full-width word-wrap" *ngIf="editingGift.PictureURL">
+        <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput #url maxlength="2000" placeholder="The link (URL) of the gift picture"
+          [(ngModel)]=gift.pictureURL></textarea>
         <md-icon mdSuffix (click)="editSwitchPictureURL(false)">done</md-icon>
         <md-hint align="start"><strong>Test if link works by checking the displayed picture</strong> </md-hint>
-        <md-hint align="end">{{url.value.length}} / 256</md-hint>
+        <md-hint align="end">{{url.value.length}} / 2000</md-hint>
       </md-input-container>
 
       <md-card-content>
         <md-input-container>
           <input type="text" disabled="true" mdInput placeholder="Desired Rating">
-          <md-slider max="10" min="1" value={{gift.desiredRating}}></md-slider>
-          <md-slide-toggle [(ngModel)]=gift.recieved>Recieved</md-slide-toggle>
+          <md-slider class="full-width" max="10" min="1" value={{gift.desiredRating}}></md-slider>
         </md-input-container>
-        <md-input-container>
-          <input mdInput placeholder="Recieve Time" [(ngModel)]=gift.recieveTime>
-        </md-input-container>
+        <br>
         <md-input-container>
           <input mdInput placeholder="Added Time" [(ngModel)]=gift.addedTime>
         </md-input-container>
-        <md-input-container>
-          <input mdInput placeholder="Where to Buy" [(ngModel)]=gift.whereToBuy>
+        <br>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput placeholder="Where to Buy" [(ngModel)]=gift.whereToBuy> </textarea>
         </md-input-container>
+        <br>
+        <md-input-container>
+          <input mdInput placeholder="Recieve Time" [(ngModel)]=gift.recieveTime>
+        </md-input-container>
+        <md-slide-toggle [(ngModel)]=gift.recieved>Recieved</md-slide-toggle>
       </md-card-content>
       <md-card-actions>
         <button (click)="updateGift(gift)" md-raised-button color="primary" class="action-button">Update</button>

@@ -20,6 +20,7 @@ export class EmailComponent {
   email: string = "";
   password: string = "";
 
+
   // formControl = new FormControl('', Validators.required);
   // emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
 
@@ -48,20 +49,18 @@ export class EmailComponent {
           .then(
             (data) => { this.logger.log("Promise resolve recieved",data);
                         this.router.navigateByUrl('/members'); },
-          (err) => { this.logger.log("Promise reject recieved",err);}
+          (err) => { this.logger.log("Promise reject recieved",err);
+                    //   this.logger.log("Login failed! Let's show some feedback!");
+                    this.error = err.message;
+
+
+                    }
         )
-        // this.logger.log(loginSuccess);
-        // if (loginSuccess) {
-        //   this.logger.log("Login success, navigating to members");
-        //   this.router.navigateByUrl('/members');
-        // } else {
-        //   this.logger.log("Login failed! Let's show some feedback!");
-        //   //to be implemented, show feedback to user after login failed.
-        // }
+
 
       } else {
         this.logger.log("Only login if the user is not authenticated, if the user is authenticated, then she must first logout");
-
+        this.router.navigateByUrl('/members');
       }
 
     }
