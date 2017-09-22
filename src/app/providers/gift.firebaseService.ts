@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Logger } from './logger.service';
 import { GiftData } from './../gifts/giftdata';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
@@ -11,14 +12,26 @@ import 'rxjs/add/operator/toPromise';
 export class GiftFirebaseService {
   user: string;
   api: string;
-  constructor(private angularfire: AngularFireDatabase, private logger: Logger) { }
 
-  getGifts(person): FirebaseListObservable<any> {
+  constructor(private angularfire: AngularFireDatabase, private logger: Logger) {
+  }
+
+  getAllGifts(person: string): FirebaseListObservable<any[]> {
     this.api =  '/gifts/' + person + '/desired-gifts';
     this.logger.log("the firebase object is : " + this.api);
-    this.user = person;
     return this.angularfire.list(this.api);
 
+  }
+
+
+    getGifts(person: string, recieved: boolean): FirebaseListObservable<any[]> {
+    this.api =  '/gifts/' + person + '/desired-gifts';
+    this.logger.log("the firebase object is : " + this.api);
+    return this.angularfire.list(this.api, { query: {
+      orderByChild: 'recieved',
+      equalTo: recieved
+     }
+    })
   }
 
   addGift(newGift:any): void {

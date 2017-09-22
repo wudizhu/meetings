@@ -24,8 +24,8 @@ import { GiftDetailComponent } from './gift-detail/gift-detail.component';
 import { GiftSearchComponent } from './gift-search/gift-search.component';
 import { GiftesComponent } from './gifts/gifts.component';
 import {MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
-import {OverlayContainer} from '@angular/material';
-import {KeysPipe} from './pipes/objects.pipe';
+import { OverlayContainer, MdTabsModule } from "@angular/material";
+import {SearchFilter} from './pipes/search.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 
@@ -52,7 +52,7 @@ export const firebaseConfig = {
     GiftDetailComponent,
     GiftSearchComponent,
     GiftesComponent,
-    KeysPipe
+    SearchFilter
   ],
   imports: [
     BrowserModule,
@@ -71,6 +71,7 @@ export const firebaseConfig = {
     MdInputModule,
     MdSliderModule,
     MdSlideToggleModule,
+    MdTabsModule,
     FlexLayoutModule
   ],
   providers: [AuthGuard, AuthService, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],

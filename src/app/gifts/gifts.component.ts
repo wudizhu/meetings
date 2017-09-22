@@ -1,3 +1,4 @@
+import { SearchFilter } from './../pipes/search.pipe';
 // import { Logger } from './../providers/logger.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Component, Pipe } from '@angular/core';
@@ -31,7 +32,7 @@ export class GiftesComponent implements OnInit {
     this.editingGift.PictureURL = false;
     this.newGift = new GiftData();
     this.route.params
-      .switchMap((params: Params) => this.getGifts(params['person'], 'firebase'))
+      .switchMap((params: Params) => this.getGifts(params['person'], 'firebase', false))
       .subscribe(gifts => {
         this.logger.log("giftsdata are " + JSON.stringify(gifts));
         this.giftsdata = gifts;
@@ -41,7 +42,7 @@ export class GiftesComponent implements OnInit {
 
   giftsdata: GiftData[];
   giftsFirebase: FirebaseObjectObservable<any>;
-  giftsFirebaseList: FirebaseListObservable<any>;
+  giftsFirebaseList: FirebaseListObservable<any[]>;
 
   addingGift: boolean;
   newGift: GiftData;
@@ -58,15 +59,39 @@ export class GiftesComponent implements OnInit {
   };
 
 
-  getGiftsByPerson(person): FirebaseListObservable<any> {
-
-    return this.getGifts(person, 'firebase');
-  }
-
-  getGifts(person, service): FirebaseListObservable<any> {
+  getGifts(person, service, recieved: boolean): FirebaseListObservable<any[]> {
     if (service != null) {
       if (service == 'firebase') {
-        this.giftsFirebaseList = <FirebaseListObservable<any>>this.giftFirebaseService.getGifts(person)
+        this.giftsFirebaseList = <FirebaseListObservable<any[]>>this.giftFirebaseService.getGifts(person, recieved)
+          .map(items => {
+            this.logger.log("raw object is: " + JSON.stringify(items));
+            return items.map(item => {
+              this.logger.log("the gift key is: " + item.$key);
+              let {
+                "name": name,
+                "added-time": addedTime,
+                "description": description,
+                "pictureURL": pictureURL,
+                "desired-rating": desiredRating,
+                "recieve-time": recieveTime,
+                "recieved": recieved,
+                "where-to-buy": whereToBuy
+               } = item;
+              let gift = new GiftData(item.$key, name, addedTime, description, pictureURL, desiredRating, recieveTime, recieved, whereToBuy);
+              return gift
+            });
+          });
+        this.logger.log("this.giftsFirebaseList is: " + JSON.stringify(this.giftsFirebaseList));
+        return this.giftsFirebaseList;
+      }
+    }
+  }
+
+
+  getAllGifts(person, service): FirebaseListObservable<any[]> {
+    if (service != null) {
+      if (service == 'firebase') {
+        this.giftsFirebaseList = <FirebaseListObservable<any[]>>this.giftFirebaseService.getAllGifts(person)
           .map(items => {
             this.logger.log("raw object is: " + JSON.stringify(items));
             return items.map(item => {
