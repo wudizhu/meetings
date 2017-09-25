@@ -2,10 +2,10 @@ import { SearchFilter } from './../pipes/search.pipe';
 // import { Logger } from './../providers/logger.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Component, Pipe } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { OnInit, AfterViewInit } from '@angular/core';
 import { GiftData } from './giftdata';
 import { GiftHttpService } from '../providers/gift.httpService';
-import { GiftFirebaseService } from '../providers/gift.firebaseService';
+import { GiftFirebaseService} from '../providers/gift.firebaseService';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -23,7 +23,7 @@ import { Logger } from "app/providers/logger.service";
 
 
 
-export class GiftesComponent implements OnInit {
+export class GiftesComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -38,6 +38,8 @@ export class GiftesComponent implements OnInit {
         this.giftsdata = gifts;
       });
   }
+
+  ngAfterViewInit() {}
 
 
   giftsdata: GiftData[];

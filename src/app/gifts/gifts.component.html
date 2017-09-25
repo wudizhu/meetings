@@ -1,5 +1,5 @@
-<md-tab-group>
-  <md-tab>
+<md-tab-group backgroundColor="primary">
+  <md-tab active>
     <ng-template md-tab-label>
       <button (click)="expandAddingGift()" md-raised-button color="primary" class="action-button">Add a New Gift</button>
     </ng-template>
@@ -53,7 +53,7 @@
       </md-card>
     </div>
 
-    <div fxLayout fxLayout.xs="column" *ngFor="let gift of giftsdata | searchFilter:'recieved':true">
+    <div fxLayout fxLayout.xs="column" *ngFor="let gift of giftsdata">
       <!--each gift goes here -->
       <md-card>
         <md-card-header fxLayout="column">
