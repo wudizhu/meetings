@@ -29,6 +29,7 @@ import {SearchFilter} from './pipes/search.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 
+
 export const firebaseConfig = {
     firebase: {
     apiKey: "AIzaSyBZ6Z0j0q3ICT69URZYFpMhv2Q0FgM1DLg",

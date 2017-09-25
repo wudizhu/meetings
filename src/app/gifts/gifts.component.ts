@@ -2,7 +2,7 @@ import { SearchFilter } from './../pipes/search.pipe';
 // import { Logger } from './../providers/logger.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Component, Pipe } from '@angular/core';
-import { OnInit, AfterViewInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { GiftData } from './giftdata';
 import { GiftHttpService } from '../providers/gift.httpService';
 import { GiftFirebaseService} from '../providers/gift.firebaseService';
@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { GiftStatus } from './gift-status'
 import { Logger } from "app/providers/logger.service";
+
 
 
 
@@ -23,7 +24,7 @@ import { Logger } from "app/providers/logger.service";
 
 
 
-export class GiftesComponent implements AfterViewInit, OnInit {
+export class GiftesComponent implements  OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -32,19 +33,23 @@ export class GiftesComponent implements AfterViewInit, OnInit {
     this.editingGift.PictureURL = false;
     this.newGift = new GiftData();
     this.route.params
-      .switchMap((params: Params) => this.getGifts(params['person'], 'firebase', false))
+      .switchMap((params: Params) => this.getAllGifts(params['person'], 'firebase'))
       .subscribe(gifts => {
         this.logger.log("giftsdata are " + JSON.stringify(gifts));
-        this.giftsdata = gifts;
+        this.giftsdata = gifts
+        .filter(item=> {
+            if (item.recieved === null || item.recieved === undefined) {
+              return false;
+            } else {
+              this.logger.log("recieved :" + item.recieved, !!item.recieved);
+              return (!!item.recieved === this.showRecieved)?true:false;
+            }
+        });
       });
   }
-
-  ngAfterViewInit() {}
-
-
+  showRecieved: boolean = false;
   giftsdata: GiftData[];
-  giftsFirebase: FirebaseObjectObservable<any>;
-  giftsFirebaseList: FirebaseListObservable<any[]>;
+  giftsFirebaseList: FirebaseListObservable<GiftData[]>;
 
   addingGift: boolean;
   newGift: GiftData;
@@ -60,11 +65,10 @@ export class GiftesComponent implements AfterViewInit, OnInit {
     private logger: Logger) {
   };
 
-
-  getGifts(person, service, recieved: boolean): FirebaseListObservable<any[]> {
+  getGifts(person, service, recieved: boolean): FirebaseListObservable<GiftData[]> {
     if (service != null) {
       if (service == 'firebase') {
-        this.giftsFirebaseList = <FirebaseListObservable<any[]>>this.giftFirebaseService.getGifts(person, recieved)
+        this.giftsFirebaseList = <FirebaseListObservable<GiftData[]>>this.giftFirebaseService.getGifts(person, recieved)
           .map(items => {
             this.logger.log("raw object is: " + JSON.stringify(items));
             return items.map(item => {
@@ -159,7 +163,7 @@ export class GiftesComponent implements AfterViewInit, OnInit {
   }
 
   updateGift(updateGift: GiftData): void {
-    this.logger.log("Updating gift  with the data: " + JSON.stringify(updateGift.key));
+    this.logger.log("Updating gift  with the data: " + JSON.stringify(updateGift));
     this.giftFirebaseService.updateGift(updateGift.key,
       {
         "name": updateGift.name,
