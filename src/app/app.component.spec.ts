@@ -27,7 +27,6 @@ import { GiftSearchComponent } from './gift-search/gift-search.component';
 import { GiftesComponent } from './gifts/gifts.component';
 import { MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MaterialModule } from '@angular/material';
 import { OverlayContainer } from '@angular/material';
-import { KeysPipe } from './pipes/objects.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 

@@ -1,9 +1,16 @@
-<div *ngIf="!addingGift">
-  <button (click)="expandAddingGift()" md-raised-button color="primary" class="action-button">Add a New Gift</button>
-  <md-input-container>
+<div *ngIf="!addingGift&&!searchingGifts">
+  <div fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="start">
+    <button (click)="expandAddingGift()" md-raised-button color="primary" class="action-button">Add a New Gift</button>
+    <button (click)="expandSearchingGift()" md-raised-button color="primary" class="action-button">Search Gifts</button>
+
+     <md-slide-toggle #searchBox fxFlexAlign="end" [(ngModel)]=showRecieved (change)="search(searchBox.value, showRecieved)" labelPosition="before">Recieved</md-slide-toggle>
+  </div>
+</div>
+<div *ngIf="searchingGifts" fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="center">
+  <md-input-container class="full-width">
     <input #searchBox mdInput placeholder="Search gifts" (keyup)="search(searchBox.value, showRecieved)">
   </md-input-container>
-  <md-slide-toggle [(ngModel)]=showRecieved (change)="search(searchBox.value, showRecieved)" labelPosition="before">Recieved</md-slide-toggle>
+  <button (click)="exitSearch()" md-raised-button color="primary" class="action-button">Exist Search</button>
 </div>
 
 <div *ngIf="addingGift">

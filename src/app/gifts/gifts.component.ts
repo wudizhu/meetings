@@ -30,6 +30,7 @@ export class GiftesComponent implements OnInit {
   private searchTerms = new Subject<Filter>();
 
   addingGift: boolean;
+  searchingGifts: boolean;
   newGift: GiftData;
   editingGift: GiftStatus = new GiftStatus();
   user: string;
@@ -45,6 +46,7 @@ export class GiftesComponent implements OnInit {
     //Add 'implements OnInit' to the class.
     this.logger.log("loading gifts!");
     this.addingGift = false;
+    this.searchingGifts = false;
     this.editingGift.PictureURL = false;
     this.newGift = new GiftData();
 
@@ -238,6 +240,18 @@ export class GiftesComponent implements OnInit {
 
   expandAddingGift(): void {
     this.addingGift = true;
+  }
+  expandSearchingGift(): void {
+    this.searchingGifts = true;
+    this.showRecieved = false;
+    this.search(null, this.showRecieved);
+
+  }
+
+  exitSearch(): void {
+    this.searchingGifts = false;
+    this.showRecieved = false;
+    this.search(null, this.showRecieved);
   }
 
   editSwitch(status: GiftStatus): void {
