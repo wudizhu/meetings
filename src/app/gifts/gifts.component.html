@@ -1,6 +1,9 @@
 <div *ngIf="!addingGift">
   <button (click)="expandAddingGift()" md-raised-button color="primary" class="action-button">Add a New Gift</button>
-<md-slide-toggle [(ngModel)]=showRecieved labelPosition="before">Show Recieved</md-slide-toggle>
+  <md-input-container>
+    <input #searchBox mdInput placeholder="Search gifts" (keyup)="search(searchBox.value, showRecieved)">
+  </md-input-container>
+  <md-slide-toggle [(ngModel)]=showRecieved (change)="search(searchBox.value, showRecieved)" labelPosition="before">Recieved</md-slide-toggle>
 </div>
 
 <div *ngIf="addingGift">
