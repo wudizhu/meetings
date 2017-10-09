@@ -16,6 +16,7 @@ import { GiftStatus } from "./gift-status";
 import { Logger } from "app/providers/logger.service";
 import { Filter } from "app/gifts/filter";
 
+
 @Component({
   selector: "gifts",
   templateUrl: "./gifts.component.html",
@@ -34,6 +35,7 @@ export class GiftesComponent implements OnInit {
   newGift: GiftData;
   editingGift: GiftStatus = new GiftStatus();
   user: string;
+  proceedToDelete: boolean = false;
 
   //push a search term into the observable stream.
   search(term: string, recieved: boolean): void {
@@ -85,7 +87,7 @@ export class GiftesComponent implements OnInit {
     private giftService: GiftHttpService,
     private giftFirebaseService: GiftFirebaseService,
     private route: ActivatedRoute,
-    private logger: Logger
+    private logger: Logger,
   ) {}
 
   getGifts(
@@ -229,6 +231,7 @@ export class GiftesComponent implements OnInit {
       "where-to-buy": newGift.whereToBuy
     });
     this.addingGift = false;
+    this.newGift = new GiftData();
   }
 
   cancel(newGift: GiftData): void {

@@ -11,14 +11,14 @@ export class GiftData {
 
   constructor(
     key: string = "key",
-    name: string = "name",
-    addedTime: string = "2017-01-01",
-    description: string = "description",
-    pictureURL: string = "Copy the link of picture",
+    name: string = "",
+    addedTime: string = "",
+    description: string = "",
+    pictureURL: string = "",
     desiredRating: number = 0,
-    recieveTime: string = "time to recieve",
+    recieveTime: string = "",
     recieved: boolean = false,
-    whereToBuy: string = "where to buy") {
+    whereToBuy: string = "") {
     this.key = key;
     this.name = name;
     this.addedTime = addedTime;

@@ -27,6 +27,8 @@ import {MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMen
 import { OverlayContainer, MdTabsModule } from "@angular/material";
 import {SearchFilter} from './pipes/search.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MdDialogModule } from '@angular/material';
+import { ProceedDelete, ProceedDeleteDialog } from 'app/gifts/preceedDeleteDialog.component';
 
 
 
@@ -53,7 +55,9 @@ export const firebaseConfig = {
     GiftDetailComponent,
     GiftSearchComponent,
     GiftesComponent,
-    SearchFilter
+    SearchFilter,
+    ProceedDelete,
+    ProceedDeleteDialog
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,11 @@ export const firebaseConfig = {
     MdSliderModule,
     MdSlideToggleModule,
     MdTabsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MdDialogModule
+  ],
+  entryComponents: [
+    ProceedDeleteDialog
   ],
   providers: [AuthGuard, AuthService, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],
   bootstrap: [AppComponent]
