@@ -1,0 +1,38 @@
+{
+  "Hongyan" : {
+      "meetings" : {
+        "1" : {
+          "time" : "09/10/2017",
+          "description" : "The role of astrocytes in Motor Neuron Disease",
+          "speaker" : "Dr Veronica Brivio",
+          "pictureURL" : "",
+          "speakerlink" : "",
+          "status" : "Cancelled"
+        },
+        "2" : {
+          "time" : "11/09/2017",
+          "description" : "Ih current contributes to rhythm generation in a spinal central pattern generator for locomotion",
+          "speaker" : "Dr Hongyan Zhang",
+          "pictureURL" : "",
+          "speakerlink" : "",
+          "status" : "Finished"
+        },
+        "3" : {
+          "time" : "08/05/2017",
+          "description" : "mGluR-NMDAR crosstalk: overlapping modulation",
+          "speaker" : "Dr Sergiy Sylantyev",
+          "pictureURL" : "",
+          "speakerlink" : "",
+          "status" : "Finished"
+        },
+        "4" : {
+          "time" : "10/04/2017",
+          "description" : "Neuronal activity as a potential regulator of myelination",
+          "speaker" : "Dr Dau Suninaite",
+          "pictureURL" : "",
+          "speakerlink" : "",
+          "status" : "Finished"
+        }
+      }
+    }
+  }

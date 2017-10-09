@@ -17,7 +17,7 @@ export class GiftFirebaseService {
   }
 
   getAllGifts(person: string): FirebaseListObservable<any[]> {
-    this.api =  '/gifts/' + person + '/desired-gifts';
+    this.api = '/' + person + '/meetings';
     this.logger.log("the firebase object is : " + this.api);
     return this.angularfire.list(this.api);
 

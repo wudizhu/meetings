@@ -18,7 +18,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const routes: Routes = [
     { path: '',
-      redirectTo: '/login',
+      redirectTo: '/lifemeetings',
       pathMatch: 'full' },
     { path: 'login',
       component: EmailComponent },
@@ -30,6 +30,10 @@ const routes: Routes = [
       component: MembersComponent, canActivate: [AuthGuard] },
     {
       path: 'gifts/:person',
+      component: GiftesComponent
+    },
+    {
+      path: 'lifemeetings',
       component: GiftesComponent
     },
     { path: 'dashboard', component: DashboardComponent },

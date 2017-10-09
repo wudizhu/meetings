@@ -28,19 +28,21 @@ import { OverlayContainer, MdTabsModule } from "@angular/material";
 import {SearchFilter} from './pipes/search.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MdDialogModule } from '@angular/material';
-import { ProceedDelete, ProceedDeleteDialog } from 'app/gifts/preceedDeleteDialog.component';
+// import { ProceedDelete, ProceedDeleteDialog } from 'app/gifts/preceedDeleteDialog.component';
 
 
 
 export const firebaseConfig = {
     firebase: {
-    apiKey: "AIzaSyBZ6Z0j0q3ICT69URZYFpMhv2Q0FgM1DLg",
-    authDomain: "giftslist-bf2f8.firebaseapp.com",
-    databaseURL: "https://giftslist-bf2f8.firebaseio.com",
-    storageBucket: "giftslist-bf2f8.appspot.com",
-    messagingSenderId: "668847751266"
-  }
+      apiKey: "AIzaSyBgNxQTpJRuPBbvQkfmMDTuI6NdbjLZYAw",
+      authDomain: "hongyan-zhang.firebaseapp.com",
+      databaseURL: "https://hongyan-zhang.firebaseio.com",
+      projectId: "hongyan-zhang",
+      storageBucket: "hongyan-zhang.appspot.com",
+      messagingSenderId: "1099295376168"
+    }
 }
+
 
 
 @NgModule({
@@ -55,9 +57,7 @@ export const firebaseConfig = {
     GiftDetailComponent,
     GiftSearchComponent,
     GiftesComponent,
-    SearchFilter,
-    ProceedDelete,
-    ProceedDeleteDialog
+    SearchFilter
   ],
   imports: [
     BrowserModule,
@@ -80,9 +80,9 @@ export const firebaseConfig = {
     FlexLayoutModule,
     MdDialogModule
   ],
-  entryComponents: [
-    ProceedDeleteDialog
-  ],
+  // entryComponents: [
+  //   ProceedDeleteDialog
+  // ],
   providers: [AuthGuard, AuthService, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],
   bootstrap: [AppComponent]
 })
