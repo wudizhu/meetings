@@ -1,8 +1,6 @@
+import { meetingsComponent } from './meetings/meetings.component';
 import { Logger } from './providers/logger.service';
-import { GiftFirebaseService } from './providers/gift.firebaseService';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './providers/in-memory-data.service';
-import { GiftHttpService } from './providers/gift.httpService';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule, animate } from '@angular/core';
@@ -12,22 +10,18 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase} from 'angularfire2/database';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
-import { MembersComponent } from './members/members.component';
 import { AuthGuard, AuthService } from './providers/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { GiftDetailComponent } from './gift-detail/gift-detail.component';
-import { GiftSearchComponent } from './gift-search/gift-search.component';
-import { GiftesComponent } from './gifts/gifts.component';
 import {MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
 import { OverlayContainer, MdTabsModule } from "@angular/material";
 import {SearchFilter} from './pipes/search.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MdDialogModule } from '@angular/material';
+import { meetingFirebaseService } from "app/providers/meeting.firebaseService";
+
 // import { ProceedDelete, ProceedDeleteDialog } from 'app/gifts/preceedDeleteDialog.component';
 
 
@@ -48,15 +42,10 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     EmailComponent,
     SignupComponent,
-    MembersComponent,
     PageNotFoundComponent,
-    DashboardComponent,
-    GiftDetailComponent,
-    GiftSearchComponent,
-    GiftesComponent,
+    meetingsComponent,
     SearchFilter
   ],
   imports: [
@@ -65,7 +54,6 @@ export const firebaseConfig = {
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
     AngularFireModule.initializeApp(firebaseConfig.firebase),
     AppRoutingModule,
     MdButtonModule,
@@ -80,10 +68,7 @@ export const firebaseConfig = {
     FlexLayoutModule,
     MdDialogModule
   ],
-  // entryComponents: [
-  //   ProceedDeleteDialog
-  // ],
-  providers: [AuthGuard, AuthService, GiftHttpService, InMemoryDataService, GiftFirebaseService, AngularFireAuth, AngularFireDatabase, Logger],
+  providers: [AuthGuard, AuthService, AngularFireAuth, AngularFireDatabase, Logger, meetingFirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

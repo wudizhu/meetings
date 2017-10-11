@@ -1,4 +1,4 @@
-export class GiftData {
+export class Meeting {
   key: string;
   time: string;
   description: string;

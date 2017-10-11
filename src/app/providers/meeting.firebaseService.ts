@@ -1,22 +1,21 @@
 import { Subject } from 'rxjs/Subject';
 import { Logger } from './logger.service';
-import { GiftData } from './../gifts/giftdata';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
-import { Gift } from '../gifts/gift';
 import 'rxjs/add/operator/toPromise';
+import { Meeting } from "app/meetings/meeting";
 
 
 
 @Injectable()
-export class GiftFirebaseService {
+export class meetingFirebaseService {
   user: string;
   api: string;
 
   constructor(private angularfire: AngularFireDatabase, private logger: Logger) {
   }
 
-  getAllGifts(person: string): FirebaseListObservable<any[]> {
+  getAllMeetings(person: string): FirebaseListObservable<any[]> {
     this.api = '/' + person + '/meetings';
     this.logger.log("the firebase object is : " + this.api);
     return this.angularfire.list(this.api);
@@ -24,8 +23,8 @@ export class GiftFirebaseService {
   }
 
 
-    getGifts(person: string, recieved: boolean): FirebaseListObservable<any[]> {
-    this.api =  '/gifts/' + person + '/desired-gifts';
+    getMeeting(person: string, recieved: boolean): FirebaseListObservable<any[]> {
+    this.api =  '/meeting/' + person + '/desired-meeting';
     this.logger.log("the firebase object is : " + this.api);
     return this.angularfire.list(this.api, { query: {
       orderByChild: 'recieved',
@@ -34,23 +33,23 @@ export class GiftFirebaseService {
     })
   }
 
-  addGift(newGift:any): void {
+  addmeeting(newmeeting:any): void {
     this.logger.log("the firebase object is : " + this.api);
-     this.angularfire.list(this.api).push(newGift);
+     this.angularfire.list(this.api).push(newmeeting);
 
   }
 
-    updateGift(key:string, updateGift:any): void {
+    updatemeeting(key:string, updatemeeting:any): void {
     this.logger.log("the firebase object is : " + this.api);
-    console.log ("updating gift with key: " + key);
-     this.angularfire.list(this.api).update(key, updateGift);
+    console.log ("updating meeting with key: " + key);
+     this.angularfire.list(this.api).update(key, updatemeeting);
 
   }
 
-   removeGift(gift:GiftData): void {
+   removemeeting(meeting:Meeting): void {
     this.logger.log("the firebase object is : " + this.api);
-    console.log ("removing gift with key: " + gift.key);
-     this.angularfire.list(this.api).remove(gift.key);
+    console.log ("removing meeting with key: " + meeting.key);
+     this.angularfire.list(this.api).remove(meeting.key);
 
   }
   private handleError(error: any): Promise<any> {

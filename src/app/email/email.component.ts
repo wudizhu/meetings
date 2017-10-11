@@ -26,7 +26,7 @@ export class EmailComponent {
 
 
   constructor(private auth: AuthService, private router: Router, private logger: Logger) {
-    this.welcome = "Welcome to Gifts";
+    this.welcome = "Welcome to Hongyan Home Page";
     if (this.auth.isAuthenticated) {
       this.router.navigateByUrl('/members');
     }

@@ -9,19 +9,19 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$gifts-app-primary: mat-palette($mat-deep-orange, A200);
-$gifts-app-accent:  mat-palette($mat-deep-orange, A200, A100, A400);
+$hongyan-app-primary: mat-palette($mat-deep-orange, A200);
+$hongyan-app-accent:  mat-palette($mat-deep-orange, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$gifts-app-warn:    mat-palette($mat-red);
+$hongyan-app-warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$gifts-app-theme: mat-light-theme($gifts-app-primary, $gifts-app-accent, $gifts-app-warn);
+$hongyan-app-theme: mat-light-theme($hongyan-app-primary, $hongyan-app-accent, $hongyan-app-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($gifts-app-theme);
+@include angular-material-theme($hongyan-app-theme);
 
 
 .dark-theme {
