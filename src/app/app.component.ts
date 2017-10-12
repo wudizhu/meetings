@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   name:any;
-  title = 'LiFE (Little France Electrophysiology) Group meeting';
+  title = 'Welcome to Hongyan\'s home page';
 
   constructor(public angularfire: AngularFireAuth, private router: Router, private logger: Logger) {
     this.angularfire.authState.subscribe(auth => {

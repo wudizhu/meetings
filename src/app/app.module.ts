@@ -22,7 +22,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MdDialogModule } from '@angular/material';
 import { meetingFirebaseService } from "app/providers/meeting.firebaseService";
 
-// import { ProceedDelete, ProceedDeleteDialog } from 'app/gifts/preceedDeleteDialog.component';
+
 
 
 

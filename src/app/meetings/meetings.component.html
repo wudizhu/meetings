@@ -1,41 +1,46 @@
-<div>
-    <img md-card-image class="meeting-img" src="assets/images/logo2.webp" (error)="errorHandler($event)">
-    <img md-card-image class="meeting-img" src="assets/images/waves.gif" (error)="errorHandler($event)">
-    <img md-card-image class="meeting-img" src="assets/images/logo1.gif" (error)="errorHandler($event)">
+<div fxLayout="row" fxLayoutWrap fxLayoutGap="10px">
+
+    <md-icon>people</md-icon>
+    <span class="heading" fxFlex="50">LiFE (Little France Electrophysiology) Group meeting</span>
+
+
+    <img  fxFlex="10" class="meeting-img" src="assets/images/logo2.webp">
+    <img  fxFlex="10" class="meeting-img" src="assets/images/waves.gif" >
+    <img  fxFlex="20" class="meeting-img" src="assets/images/logo1.gif" >
+
 </div>
 
-<div fxLayout fxLayout.xs="column" *ngFor="let meeting of meetings">
+
+<div fxLayout="column">
+<div  class="card-container" *ngFor="let meeting of meetings">
   <!--each meeting goes here -->
   <md-card>
-    <md-card-header fxLayout="column">
+    <md-card-header>
       <md-input-container class="full-width word-wrap">
-        <input mdInput #time maxlength="256" placeholder="Meeting Time" [(ngModel)]=meeting.time>
+        <input type="text" mdInput #time maxlength="256" placeholder="Meeting Time" [(ngModel)]=meeting.time>
         <md-hint align="end">{{time.value.length}} / 256</md-hint>
 
       </md-input-container>
-      <md-input-container class="full-width word-wrap">
-        <input mdInput #speaker maxlength="256" placeholder="Speaker" [(ngModel)]=meeting.speaker>
-        <md-hint align="end">{{speaker.value.length}} / 256</md-hint>
 
-      </md-input-container>
 
       <md-input-container>
         <input mdInput placeholder="Status" [(ngModel)]=meeting.status>
       </md-input-container>
+
       <md-input-container class="full-width word-wrap">
         <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput #meetingDescription maxlength="2000" placeholder="Meeting Description"
           [(ngModel)]=meeting.description></textarea>
         <md-hint align="end">{{meetingDescription.value.length}} / 2000</md-hint>
       </md-input-container>
-    </md-card-header>
-  <md-card-content>
-    <img md-card-image class="meeting-img" [src]=meeting.speakerPictureURL>
-    <md-input-container class="full-width word-wrap">
-      <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput #speakerlink maxlength="2000" placeholder="Speak homepage"
-        [(ngModel)]=meeting.speakerlink></textarea>
-      <md-hint align="end">{{speakerlink.value.length}} / 2000</md-hint>
-    </md-input-container>
+       <md-input-container class="full-width word-wrap">
+        <input mdInput #speaker maxlength="256" placeholder="Speaker" [(ngModel)]=meeting.speaker>
+        <md-hint align="end">{{speaker.value.length}} / 256</md-hint>
 
-    </md-card-content>
+      </md-input-container>
+    </md-card-header>
+    <!-- <md-card-content>
+    <img md-card-image class="meeting-img" [src]=meeting.speakerPictureURL>
+    </md-card-content> -->
   </md-card>
+</div>
 </div>

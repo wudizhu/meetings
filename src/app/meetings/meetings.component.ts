@@ -74,7 +74,7 @@ export class meetingsComponent implements OnInit {
           >>this.meetingFirebaseService.getAllMeetings(person).map(items => {
             this.logger.log("raw object is: " + JSON.stringify(items));
             return items.map(item => {
-              this.logger.log("the gift key is: " + item.$key);
+              this.logger.log("the meeting key is: " + item.$key);
               let {
                 time: time,
                 description: description,
@@ -83,7 +83,7 @@ export class meetingsComponent implements OnInit {
                 speakerlink: speakerlink,
                 status: status
             } = item;
-              let gift = new Meeting(
+              let meeting = new Meeting(
                 item.$key,
                 time,
                 description,
@@ -92,7 +92,7 @@ export class meetingsComponent implements OnInit {
                 speakerlink,
                 status
               );
-              return gift;
+              return meeting;
             });
           });
 

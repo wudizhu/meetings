@@ -1,5 +1,6 @@
 <md-toolbar color="primary">
-  <span (click)="home()">{{this.title}}</span>
+  <md-icon (click)="home()">home</md-icon>
+  <span>{{this.title}}</span>
   <span class="spacer"></span>
   <button md-icon-button [mdMenuTriggerFor]="sideMenu">
     <md-icon>more_vert</md-icon>

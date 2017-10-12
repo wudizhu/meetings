@@ -1,38 +1,103 @@
 {
-  "Hongyan" : {
-      "meetings" : {
-        "1" : {
-          "time" : "09/10/2017",
-          "description" : "The role of astrocytes in Motor Neuron Disease",
-          "speaker" : "Dr Veronica Brivio",
-          "pictureURL" : "",
-          "speakerlink" : "",
-          "status" : "Cancelled"
-        },
-        "2" : {
-          "time" : "11/09/2017",
-          "description" : "Ih current contributes to rhythm generation in a spinal central pattern generator for locomotion",
-          "speaker" : "Dr Hongyan Zhang",
-          "pictureURL" : "",
-          "speakerlink" : "",
-          "status" : "Finished"
-        },
-        "3" : {
-          "time" : "08/05/2017",
-          "description" : "mGluR-NMDAR crosstalk: overlapping modulation",
-          "speaker" : "Dr Sergiy Sylantyev",
-          "pictureURL" : "",
-          "speakerlink" : "",
-          "status" : "Finished"
-        },
-        "4" : {
-          "time" : "10/04/2017",
-          "description" : "Neuronal activity as a potential regulator of myelination",
-          "speaker" : "Dr Dau Suninaite",
-          "pictureURL" : "",
-          "speakerlink" : "",
-          "status" : "Finished"
-        }
+  "Hongyan": {
+    "meetings": {
+      "09102017": {
+        "time": "09/10/2017",
+        "description": "The role of astrocytes in Motor Neuron Disease",
+        "speaker": "Dr Veronica Brivio",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Cancelled"
+      },
+      "11092017": {
+        "time": "11/09/2017",
+        "description":
+          "Ih current contributes to rhythm generation in a spinal central pattern generator for locomotion",
+        "speaker": "Dr Hongyan Zhang",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "08052017": {
+        "time": "08/05/2017",
+        "description": "mGluR-NMDAR crosstalk: overlapping modulation",
+        "speaker": "Dr Sergiy Sylantyev",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "10042017": {
+        "time": "10/04/2017",
+        "description":
+          "Neuronal activity as a potential regulator of myelination",
+        "speaker": "Dr Dau Suninaite",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "13032017M1": {
+        "time": "13/03/2017",
+        "description":
+          "Understanding the role of neuronal activity in motor circuit regeneration following spinal cord injury",
+        "speaker": "Mr Emmanouil Tsivourakis",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "13032017M2": {
+        "time": "13/03/2017",
+        "description":
+          "Understanding the role of synaptic transmissions in the generation of a flexible locomotor pattern",
+        "speaker": "Mr Cheuk Chan",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "12122016": {
+        "time": "12/12/2016",
+        "description":
+          "The C9ORF72 repeat expansion mutation generates iPSC-derived motor neuron vulnerability to Ca2+-permeable AMPAR-mediated excitotoxicity",
+        "speaker": "Dr Dau Suninaite",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "10102016": {
+        "time": "10/10/2016",
+        "description":
+          "Functional Characterisation of Spontaneously Active GABAA Receptors in the Dentate Gyrus",
+        "speaker": "Mr Nathanael  O'neill",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "12092016": {
+        "time": "12/9/2016",
+        "description":
+          "Mechanisms underling swimming speed change in Xenopus spinal motor circuit",
+        "speaker": "Dr Florian Jacquot",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "08082016": {
+        "time": "8/8/2016",
+        "description":
+          "How does neuronal activity regulate myelin sheath formation and growth in vivo?",
+        "speaker": "Dr Marion Barahan",
+        "pictureURL": "",
+        "speakerlink": "",
+        "status": "Finished"
+      },
+      "11072016": {
+        "time": "11/7/2016",
+        "description":
+          "Input of spontaneously opening GABA-receptors into neural signalling",
+        "speaker": "Dr Sergiy Sylantyev",
+        "pictureURL": "assets/images/DrSergiySylantyev.webp",
+        "speakerlink": "http://www.ed.ac.uk/clinical-brain-sciences/people/principal-investigators/dr-sergiy-sylantyev",
+        "status": "Finished"
       }
     }
   }
+}
