@@ -1,41 +1,38 @@
 <div fxLayout="row" fxLayoutWrap fxLayoutGap="10px">
 
-    <md-icon>people</md-icon>
-    <span class="heading" fxFlex="45">LiFE (Little France Electrophysiology) Group meeting</span>
+  <md-icon>people</md-icon>
+  <span class="heading" fxFlex="45">LiFE (Little France Electrophysiology) Group meeting</span>
 
 
-    <img  fxFlex="15" class="meeting-img" src="assets/images/logo2.webp">
-    <img  fxFlex="10" class="meeting-img" src="assets/images/waves.gif" >
-    <img  fxFlex="20" class="meeting-img" src="assets/images/logo1.gif" >
+  <img fxFlex="15" class="meeting-img" src="assets/images/logo2.webp">
+  <img fxFlex="10" class="meeting-img" src="assets/images/waves.gif">
+  <img fxFlex="20" class="meeting-img" src="assets/images/logo1.gif">
 
 </div>
 
 <div>
 
-<label>Sort by Date: </label>
- <button  md-raised-button md-icon-button (click)="sort()">
+  <label>Sort by Date: </label>
+  <button md-raised-button md-icon-button (click)="sort()">
         <md-icon class="md-18|md-24|md-36|md-48">sort</md-icon>
 </button>
-<input type="text" #keyword placeholder="Search in talk" (keyup)="0">
- <button md-raised-button md-icon-button (click)="searchMeeting(keyword.value)">
+  <input type="text" #keyword placeholder="Search in talk" (keyup)="0">
+  <button md-raised-button md-icon-button (click)="searchMeeting(keyword.value)">
         <md-icon class="md-18|md-24|md-36|md-48">search</md-icon>
 </button>
 
 </div>
 <div fxLayout="column">
-<div  class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
-  <!--each meeting goes here -->
-  <md-card >
-    <md-card-header>
+  <div class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
+    <!--each meeting goes here -->
+    <md-card>
+      <md-card-header>
         <md-card-title><label>When: </label>{{meeting.time}}</md-card-title>
-        <md-card-subtitle><label>Speaker: </label>{{meeting.speaker}}</md-card-subtitle>
-        <md-card-subtitle><label>Status: </label>{{meeting.status}} <img md-card-image class="meeting-img" [src]=meeting.speakerPictureURL></md-card-subtitle>
-
-    </md-card-header>
-     <md-card-content>
-        <p><label>Talk: </label>{{meeting.description}}</p>
-
-    </md-card-content>
-  </md-card>
-</div>
+        <md-card-title><label>Talk: </label>{{meeting.description}} </md-card-title>
+        <md-card-title><label>Speaker: </label>{{meeting.speaker}}</md-card-title>
+        <img src={{meeting.speakerPictureURL}}>
+        <md-card-title><label>Status: </label>{{meeting.status}}</md-card-title>
+      </md-card-header>
+    </md-card>
+  </div>
 </div>
