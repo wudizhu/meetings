@@ -1,3 +1,4 @@
+import { OrderrByPipe } from './pipes/orderBy.pipe';
 import { meetingsComponent } from './meetings/meetings.component';
 import { Logger } from './providers/logger.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -17,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
 import { OverlayContainer, MdTabsModule } from "@angular/material";
-import {SearchFilter} from './pipes/search.pipe';
+import { SearchMeetingPipe } from './pipes/search.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MdDialogModule } from '@angular/material';
 import { meetingFirebaseService } from "app/providers/meeting.firebaseService";
@@ -46,7 +47,8 @@ export const firebaseConfig = {
     SignupComponent,
     PageNotFoundComponent,
     meetingsComponent,
-    SearchFilter
+    SearchMeetingPipe,
+    OrderrByPipe
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Observable } from "rxjs/Rx";
 import { Subject } from "rxjs/Subject";
-import { SearchFilter } from "./../pipes/search.pipe";
+import { SearchMeetingPipe } from './../pipes/search.pipe';
 import {
   FirebaseListObservable
 } from "angularfire2/database";
@@ -9,33 +9,47 @@ import { OnInit } from "@angular/core";
 import { Meeting } from "./meeting";
 import { meetingFirebaseService } from "../providers/meeting.firebaseService";
 import { Router, ActivatedRoute, Params } from "@angular/router";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/switchMap";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import { Logger } from "app/providers/logger.service";
 
 
 
 @Component({
-  selector: "meetings",
+  selector: 'meetings',
   templateUrl: "./meetings.component.html",
-  styleUrls: ["./meetings.component.css"]
+  styleUrls: ["./meetings.component.css"],
 })
+
 export class meetingsComponent implements OnInit {
   status: boolean = true;
   meetings: Meeting[];
   meetingsObservable: FirebaseListObservable<Meeting[]>;
   // meetingsList: Observable<Meeting[]>;
 
-  searchingMeetings: boolean;
-  newMeeting: Meeting;
   user: string;
+  searchText: string = "";
+  // Declare local variable
+
+  sortingProperty: string = "time";
+  isDesc: boolean = true;
+  direction: number = this.isDesc ? -1 : 1;
+
+  // Change sort function to this:
+  sort(){
+      this.isDesc = !this.isDesc; //change the direction
+      this.direction = this.isDesc ? 1 : -1;
+ }
+
+  searchMeeting(keyword) {
+    console.log("search is clicked with :" + keyword );
+    this.searchText = keyword;
+  }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.logger.log("loading meetings!");
-    this.newMeeting = new Meeting();
-
 
 
     this.route.params
@@ -79,7 +93,7 @@ export class meetingsComponent implements OnInit {
                 time: time,
                 description: description,
                 speaker: speaker,
-                PictureURL: speakerPictureURL,
+                pictureURL: speakerPictureURL,
                 speakerlink: speakerlink,
                 status: status
             } = item;

@@ -1,46 +1,41 @@
 <div fxLayout="row" fxLayoutWrap fxLayoutGap="10px">
 
     <md-icon>people</md-icon>
-    <span class="heading" fxFlex="50">LiFE (Little France Electrophysiology) Group meeting</span>
+    <span class="heading" fxFlex="45">LiFE (Little France Electrophysiology) Group meeting</span>
 
 
-    <img  fxFlex="10" class="meeting-img" src="assets/images/logo2.webp">
+    <img  fxFlex="15" class="meeting-img" src="assets/images/logo2.webp">
     <img  fxFlex="10" class="meeting-img" src="assets/images/waves.gif" >
     <img  fxFlex="20" class="meeting-img" src="assets/images/logo1.gif" >
 
 </div>
 
+<div>
 
+<label>Sort by Date: </label>
+ <button  md-raised-button md-icon-button (click)="sort()">
+        <md-icon class="md-18|md-24|md-36|md-48">sort</md-icon>
+</button>
+<input type="text" #keyword placeholder="Search in talk" (keyup)="0">
+ <button md-raised-button md-icon-button (click)="searchMeeting(keyword.value)">
+        <md-icon class="md-18|md-24|md-36|md-48">search</md-icon>
+</button>
+
+</div>
 <div fxLayout="column">
-<div  class="card-container" *ngFor="let meeting of meetings">
+<div  class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
   <!--each meeting goes here -->
-  <md-card>
+  <md-card >
     <md-card-header>
-      <md-input-container class="full-width word-wrap">
-        <input type="text" mdInput #time maxlength="256" placeholder="Meeting Time" [(ngModel)]=meeting.time>
-        <md-hint align="end">{{time.value.length}} / 256</md-hint>
+        <md-card-title><label>When: </label>{{meeting.time}}</md-card-title>
+        <md-card-subtitle><label>Speaker: </label>{{meeting.speaker}}</md-card-subtitle>
+        <md-card-subtitle><label>Status: </label>{{meeting.status}} <img md-card-image class="meeting-img" [src]=meeting.speakerPictureURL></md-card-subtitle>
 
-      </md-input-container>
-
-
-      <md-input-container>
-        <input mdInput placeholder="Status" [(ngModel)]=meeting.status>
-      </md-input-container>
-
-      <md-input-container class="full-width word-wrap">
-        <textarea mdTextareaAutosize mdAutosizeMinRows="3" mdInput #meetingDescription maxlength="2000" placeholder="Meeting Description"
-          [(ngModel)]=meeting.description></textarea>
-        <md-hint align="end">{{meetingDescription.value.length}} / 2000</md-hint>
-      </md-input-container>
-       <md-input-container class="full-width word-wrap">
-        <input mdInput #speaker maxlength="256" placeholder="Speaker" [(ngModel)]=meeting.speaker>
-        <md-hint align="end">{{speaker.value.length}} / 256</md-hint>
-
-      </md-input-container>
     </md-card-header>
-    <!-- <md-card-content>
-    <img md-card-image class="meeting-img" [src]=meeting.speakerPictureURL>
-    </md-card-content> -->
+     <md-card-content>
+        <p><label>Talk: </label>{{meeting.description}}</p>
+
+    </md-card-content>
   </md-card>
 </div>
 </div>
