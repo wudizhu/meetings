@@ -1,40 +1,69 @@
 button.delete-button {
-  background-color: lightgray;
-  /* border: 2px solid grey; */
-  border-radius: 5px;
+    background-color: lightgray;
+    /* border: 2px solid grey; */
+    border-radius: 5px;
 }
 
-img.meeting-img  {
-   width: 30%;
-   border-radius: 5%;
-   max-width: 300px;
-   min-width:50px;
-   max-height: 80px;
+img.meeting-img {
+    width: 30%;
+    border-radius: 5%;
+    max-width: 300px;
+    min-width: 50px;
+    max-height: 80px;
 }
 
 .heading {
-  font-size: 40px;
-  font-family: Lobster;
-  color: #3E2723;
+    font-size: 40px;
+    font-family: Acme;
+    color: #3E2723;
+    margin: 0px 0px 0px 35px;
+}
+
+.meeting-text {
+    font-size: 1.5em;
+    font-family: Signika;
+    color: black;
+}
+
+.accent {
+    color: #FF5722;
 }
 
 .full-width {
-  width: 90%;
+    width: 95%;
 }
 
 .word-wrap {
-  overflow-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
+.page-container {
+    margin-top: 30px;
+}
 
+.action-bar {
+    margin-top: 50px;
+}
+
+.sort-bar {
+    margin: 0px 35px 0px 35px;
+}
+
+.search-bar {
+    margin: 0px 35px 0px 35px;
+}
+
+.logo {
+    margin: 0px 10px 0px 10px;
+}
 
 /*MD card container*/
+
 .card-container {
     border: 2px solid #ccc;
     max-width: 100%;
-    margin:auto;
+    margin: auto;
     box-shadow: 0 5px 5px 0;
-
 }
 
 .card-container:hover {
@@ -46,18 +75,17 @@ img.meeting-img  {
 }
 
 .card-container .title {
-  font-size: 2em;
+    font-size: 2em;
 }
 
 .card-container .login-button {
-  font-size: 2em;
-  padding: 0.5em 3em 0.5em 3em;
-
+    font-size: 2em;
+    padding: 0.5em 3em 0.5em 3em;
 }
 
 .card-error {
-  max-width: 279px;
-  overflow-wrap: break-word;
+    max-width: 279px;
+    overflow-wrap: break-word;
 }
 
 .spacer {
@@ -66,22 +94,38 @@ img.meeting-img  {
     flex: 1 1 auto;
 }
 
-
-
-
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 800px) {
     .card-container {
         min-width: 60%;
     }
-}
-
-@media only screen and (max-width: 500px){
-    .card-container {
-        min-width: 90%;
+    .action-bar {
+        margin-top: 10px;
+    }
+    .sort-bar {
+        margin: 0px 0px 0px 15px;
+    }
+    .search-bar {
+        margin: 0px 0px 0px 15px;
+    }
+    .heading {
+        margin: 0px 0px 0px 15px;
     }
 }
 
-
-
-
-
+@media only screen and (max-width: 500px) {
+    .card-container {
+        min-width: 90%;
+    }
+    .action-bar {
+        margin-top: 10px;
+    }
+    .sort-bar {
+        margin: 0px 0px 0px 5px;
+    }
+    .search-bar {
+        margin: 0px 0px 0px 5px;
+    }
+    .heading {
+        margin: 0px 0px 0px 5px;
+    }
+}

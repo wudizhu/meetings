@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   name:any;
-  title = 'Welcome to Hongyan\'s home page';
+  title = 'Home';
 
   constructor(public angularfire: AngularFireAuth, private router: Router, private logger: Logger) {
     this.angularfire.authState.subscribe(auth => {
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 
   home() {
     this.logger.log('going to home page.');
-    this.router.navigate(['/members']);
+    this.router.navigate(['/lifemeetings']);
   }
 
    ngOnInit() {

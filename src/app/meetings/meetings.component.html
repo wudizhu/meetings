@@ -1,38 +1,45 @@
-<div fxLayout="row" fxLayoutWrap fxLayoutGap="10px">
+<div class="page-container">
+  <div fxLayout="row" fxLayout.xs="column">
+    <span class="heading" fxFlex="65%"><md-icon>people</md-icon>LiFE (Little France Electrophysiology) Group meeting</span>
+    <img fxFlex.gt-md="16%"  fxFlex.sm="30%" fxHide.xs  class="meeting-img logo" src="assets/images/cnr.jpg">
+    <img fxFlex.gt-md="12%"  fxHide.sm fxHide.xs class="meeting-img logo" src="assets/images/EdinburghNeuroscience.gif">
+  </div>
 
-  <md-icon>people</md-icon>
-  <span class="heading" fxFlex="45">LiFE (Little France Electrophysiology) Group meeting</span>
+  <div class="action-bar" fxLayout="row" fxLayout.xs="column">
+    <div class="sort-bar">
+      <label>Sort by Date: {{this.sortingOrder}} </label>
+      <button md-raised-button md-icon-button (click)="sort()">
+          <md-icon class="md-18|md-24|md-36|md-48">sort</md-icon>
+      </button>
+    </div>
+    <div class="search-bar">
+      <input type="text" size="30" max-length="100" #keyword placeholder="Search in talk" (keyup.enter)="searchMeeting(keyword.value)">
+      <button md-raised-button md-icon-button (click)="searchMeeting(keyword.value)">
+          <md-icon class="md-18|md-24|md-36|md-48">search</md-icon>
+      </button>
+      <button md-raised-button md-icon-button (click)="keyword.value= ''; searchMeeting(keyword.value)" (keyup)="0">
+          <md-icon class="md-18|md-24|md-36|md-48">clear</md-icon>
+      </button>
+    </div>
 
+  </div>
 
-  <img fxFlex="15" class="meeting-img" src="assets/images/logo2.webp">
-  <img fxFlex="10" class="meeting-img" src="assets/images/waves.gif">
-  <img fxFlex="20" class="meeting-img" src="assets/images/logo1.gif">
-
-</div>
-
-<div>
-
-  <label>Sort by Date: </label>
-  <button md-raised-button md-icon-button (click)="sort()">
-        <md-icon class="md-18|md-24|md-36|md-48">sort</md-icon>
-</button>
-  <input type="text" #keyword placeholder="Search in talk" (keyup)="0">
-  <button md-raised-button md-icon-button (click)="searchMeeting(keyword.value)">
-        <md-icon class="md-18|md-24|md-36|md-48">search</md-icon>
-</button>
-
-</div>
-<div fxLayout="column">
-  <div class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
-    <!--each meeting goes here -->
-    <md-card>
-      <md-card-header>
-        <md-card-title><label>When: </label>{{meeting.time}}</md-card-title>
-        <md-card-title><label>Talk: </label>{{meeting.description}} </md-card-title>
-        <md-card-title><label>Speaker: </label>{{meeting.speaker}}</md-card-title>
-        <img src={{meeting.speakerPictureURL}}>
-        <md-card-title><label>Status: </label>{{meeting.status}}</md-card-title>
-      </md-card-header>
-    </md-card>
+  <div fxLayout="column">
+    <div class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
+      <!--each meeting goes here -->
+      <md-card class="meeting-text">
+        <md-card-header>
+          <md-card-title>{{meeting.time}}</md-card-title>
+          <md-card-title><label>Talk: </label>{{meeting.description}} </md-card-title>
+          <md-card-title><label>Speaker: </label>{{meeting.speaker}}</md-card-title>
+          <div *ngIf="this.shouldDisplayPic(meeting.speakerPictureURL)">
+            <img src={{meeting.speakerPictureURL}}>
+          </div>
+          <div class="accent" *ngIf="this.shouldDisplayStatus(meeting.status)">
+            <md-card-title>{{meeting.status}}</md-card-title>
+          </div>
+        </md-card-header>
+      </md-card>
+    </div>
   </div>
 </div>

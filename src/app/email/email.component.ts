@@ -26,9 +26,9 @@ export class EmailComponent {
 
 
   constructor(private auth: AuthService, private router: Router, private logger: Logger) {
-    this.welcome = "Welcome to Hongyan Home Page";
+    this.welcome = "Welcome";
     if (this.auth.isAuthenticated) {
-      this.router.navigateByUrl('/members');
+      this.router.navigateByUrl('/meetings');
     }
   }
 

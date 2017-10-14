@@ -34,16 +34,27 @@ export class meetingsComponent implements OnInit {
   sortingProperty: string = "time";
   isDesc: boolean = true;
   direction: number = this.isDesc ? -1 : 1;
+  sortingOrder: string = "Newest First";
 
   // Change sort function to this:
   sort(){
       this.isDesc = !this.isDesc; //change the direction
-      this.direction = this.isDesc ? 1 : -1;
+      this.direction = this.isDesc ? -1 : 1;
+      this.sortingOrder = this.isDesc? "Newest First" : "Oldest First"
  }
 
   searchMeeting(keyword) {
     console.log("search is clicked with :" + keyword );
     this.searchText = keyword;
+  }
+
+  shouldDisplayPic(url:string): boolean {
+    return (url !== "assets/images/placeholder.png");
+  }
+
+
+  shouldDisplayStatus(status:string): boolean {
+    return (status !== "Finished");
   }
 
   ngOnInit(): void {

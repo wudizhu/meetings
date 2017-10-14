@@ -120,7 +120,7 @@ select:-webkit-autofill:focus {
 
  /*global style*/
  body {
-    background-color: lightslategrey;
+    background-color: lightgray;
     font: 1em/1.25 roboto, Helvetica, sans-serif;
  }
 
