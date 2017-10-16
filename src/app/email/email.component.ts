@@ -19,6 +19,7 @@ export class EmailComponent {
   welcome: string;
   email: string = "";
   password: string = "";
+  goBack:string="";
 
 
   // formControl = new FormControl('', Validators.required);
@@ -26,10 +27,16 @@ export class EmailComponent {
 
 
   constructor(private auth: AuthService, private router: Router, private logger: Logger) {
-    this.welcome = "Welcome";
+    this.welcome = "Login as Administrator.";
+    this.goBack = "Or continue as guest.";
     if (this.auth.isAuthenticated) {
       this.router.navigateByUrl('/meetings');
     }
+  }
+
+  home() {
+    this.logger.log('going to home page.');
+    this.router.navigate(['/lifemeetings']);
   }
 
 

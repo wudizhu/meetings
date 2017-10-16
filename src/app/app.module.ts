@@ -75,6 +75,6 @@ export const firebaseConfig = {
 })
 export class AppModule {
     constructor(overlayContainer: OverlayContainer) {
-    overlayContainer.themeClass = 'dark-theme';
+    // overlayContainer.themeClass = 'dark-theme';
   }
 }

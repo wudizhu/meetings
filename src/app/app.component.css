@@ -1,3 +1,7 @@
 .side-menu-item {
   margin-left: -10px;
 }
+
+.nav-tab {
+  cursor: pointer;
+}

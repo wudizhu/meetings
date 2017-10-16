@@ -20,13 +20,20 @@ img.meeting-img {
 }
 
 .meeting-text {
-    font-size: 1.5em;
     font-family: Signika;
     color: black;
+    font-size: 500%;
+
 }
 
+
+.mat-card-header .mat-card-title {
+    font-size: x-large;
+}
+
+
 .accent {
-    color: #FF5722;
+    color: #ff5722;
 }
 
 .full-width {
@@ -67,9 +74,12 @@ img.meeting-img {
 }
 
 .card-container:hover {
-    border: 2px solid #777;
+    border: 2px solid darkslategray;
 }
 
+/* .mat-card-title {
+  font-size: 40px;
+} */
 .card-container img {
     border-radius: 5%;
 }
@@ -110,6 +120,9 @@ img.meeting-img {
     .heading {
         margin: 0px 0px 0px 15px;
     }
+    .mat-card-header .mat-card-title {
+        font-size: large;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -127,5 +140,8 @@ img.meeting-img {
     }
     .heading {
         margin: 0px 0px 0px 5px;
+    }
+    .mat-card-header .mat-card-title {
+        font-size: medium;
     }
 }

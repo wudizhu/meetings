@@ -1,12 +1,14 @@
 <md-toolbar color="primary">
-  <md-icon (click)="home()">home</md-icon>
-  <span>{{this.title}}</span>
+  <div (click)="home()" class="nav-tab">
+    <md-icon>home</md-icon>
+    <span>{{this.title}}</span>
+  </div>
   <span class="spacer"></span>
   <button md-icon-button [mdMenuTriggerFor]="sideMenu">
     <md-icon>more_vert</md-icon>
   </button>
 
-  <md-menu  #sideMenu="mdMenu" [overlapTrigger]="false">
+  <md-menu #sideMenu="mdMenu" [overlapTrigger]="false">
     <button md-menu-item class="menu-item" (click)="logout()">
       <md-icon>fingerprint</md-icon>
       <span class="side-menu-item">Logout</span>
