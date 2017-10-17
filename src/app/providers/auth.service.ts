@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
 export class AuthService {
   private authState: firebase.User;
 
-  constructor(private angularFireAuth: AngularFireAuth, public logger: Logger) { this.init(); }
+  constructor(private angularFireAuth: AngularFireAuth, public logger: Logger, private router: Router) { this.init(); }
 
   private init(): void {
     this.angularFireAuth.authState.subscribe((authState) => {
@@ -65,8 +65,14 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.angularFireAuth.auth.signOut();
+    this.angularFireAuth.auth.signOut()
+      // You only want unathenticated states:
+      .then(
+      () => { this.authState = null;
+        this.router.navigate(['/login']);
+      })
   }
+
 
   public signInWithEmailAndPassword(email: string, password: string): Promise<any> {
     //Only login if the user is not authenticated

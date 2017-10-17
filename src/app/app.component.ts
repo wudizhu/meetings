@@ -1,3 +1,4 @@
+import { AuthService } from 'app/providers/auth.service';
 import { Logger } from 'app/providers/logger.service';
 import { Component, OnInit} from '@angular/core';
 import { AngularFireModule} from 'angularfire2';
@@ -16,19 +17,15 @@ export class AppComponent implements OnInit {
   name:any;
   title = 'Home';
 
-  constructor(public angularfire: AngularFireAuth, private router: Router, private logger: Logger) {
-    this.angularfire.authState.subscribe(auth => {
-      if(auth) {
-        this.name = auth;
-      }
-    });
+  constructor(public authFire: AuthService, private router: Router, private logger: Logger) {
 
   }
+
   get diagnostic() { return JSON.stringify(this.name); }
 
   logout() {
      this.logger.log('logged out');
-     this.angularfire.auth.signOut();
+     this.authFire.logout();
      this.router.navigate(['/login']);
   }
 

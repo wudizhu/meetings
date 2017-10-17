@@ -1,3 +1,5 @@
+import { AuthService } from './../providers/auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from "rxjs/Rx";
 import { Subject } from "rxjs/Subject";
 import { SearchMeetingPipe } from './../pipes/search.pipe';
@@ -28,6 +30,7 @@ export class meetingsComponent implements OnInit {
   // meetingsList: Observable<Meeting[]>;
 
   user: string;
+  authenticationTest: string;
   searchText: string = "";
   // Declare local variable
 
@@ -61,6 +64,11 @@ export class meetingsComponent implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.logger.log("loading meetings!");
+    if (this.auth.isAuthenticated) {
+      this.authenticationTest = this.auth.currentUid;
+    } else {
+      this.authenticationTest = "Something wrong with Auth";
+    }
 
 
     this.route.params
@@ -86,6 +94,7 @@ export class meetingsComponent implements OnInit {
     private meetingFirebaseService: meetingFirebaseService,
     private route: ActivatedRoute,
     private logger: Logger,
+    private auth : AuthService
   ) { }
 
 
