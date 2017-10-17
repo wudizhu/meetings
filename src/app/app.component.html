@@ -1,17 +1,19 @@
 <md-toolbar color="primary">
-  <div (click)="home()" class="nav-tab">
+
+  <button class="user-profile-icon nav-tab" md-mini-fab md-icon-button color="accent"  (click)="home()">
     <md-icon>home</md-icon>
-    <span>{{this.title}}</span>
-  </div>
-  <span class="spacer"></span>
-  <button md-icon-button [mdMenuTriggerFor]="sideMenu">
-    <md-icon>more_vert</md-icon>
   </button>
 
-  <md-menu #sideMenu="mdMenu" [overlapTrigger]="false">
+  <span class="spacer"></span>
+  <button class="user-profile-icon" md-mini-fab md-icon-button color="accent" [mdMenuTriggerFor]="sideMenu">
+    <md-icon>person</md-icon>
+  </button>
+  <span>{{this.user.name}}</span>
+
+   <md-menu #sideMenu="mdMenu" [overlapTrigger]="false">
     <button md-menu-item class="menu-item" (click)="logout()">
       <md-icon>fingerprint</md-icon>
-      <span class="side-menu-item">Logout</span>
+      <span class="side-menu-item">{{this.loginState}}</span>
     </button>
     <button md-menu-item class="menu-item">
       <md-icon>help</md-icon>

@@ -94,10 +94,20 @@
         "description":
           "Input of spontaneously opening GABA-receptors into neural signalling",
         "speaker": "Dr Sergiy Sylantyev",
-        "pictureURL": "assets/images/DrSergiySylantyev.webp",
+        "pictureURL": "assets/images/DrSergiySylantyev.jpg",
         "speakerlink": "http://www.ed.ac.uk/clinical-brain-sciences/people/principal-investigators/dr-sergiy-sylantyev",
         "status": "Finished"
       }
+    }
+  },
+  "users": {
+    "Hongyan" : {
+      "name": "Hongyan",
+      "uid": "IPmmaHKfM5XIsQZTvlW8rHhntOj1"
+    },
+    "Feng" : {
+      "name": "Feng",
+      "uid": "8eAqBRvU6xaR7YdtP15eQFcpve03"
     }
   }
 }

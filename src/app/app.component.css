@@ -5,3 +5,7 @@
 .nav-tab {
   cursor: pointer;
 }
+
+.user-profile-icon {
+    margin-right: 5px;
+}

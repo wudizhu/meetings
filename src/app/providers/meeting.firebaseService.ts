@@ -1,3 +1,4 @@
+import { User } from './../users/user';
 import { Subject } from 'rxjs/Subject';
 import { Logger } from './logger.service';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
@@ -11,8 +12,21 @@ import { Meeting } from "app/meetings/meeting";
 export class meetingFirebaseService {
   user: string;
   api: string;
+  userApi: string;
 
   constructor(private angularfire: AngularFireDatabase, private logger: Logger) {
+  }
+
+  getUser(uid: string): FirebaseListObservable<User[]> {
+    this.userApi =  '/users';
+    this.logger.log("the firebase api is : " + this.userApi);
+    return this.angularfire.list(this.userApi
+      , { query: {
+      orderByChild: 'uid',
+      equalTo: uid
+     }
+    }
+    )
   }
 
   getAllMeetings(person: string): FirebaseListObservable<any[]> {
@@ -39,14 +53,14 @@ export class meetingFirebaseService {
 
   }
 
-    updatemeeting(key:string, updatemeeting:any): void {
+  updatemeeting(key:string, updatemeeting:any): void {
     this.logger.log("the firebase object is : " + this.api);
     console.log ("updating meeting with key: " + key);
      this.angularfire.list(this.api).update(key, updatemeeting);
 
   }
 
-   removemeeting(meeting:Meeting): void {
+  removemeeting(meeting:Meeting): void {
     this.logger.log("the firebase object is : " + this.api);
     console.log ("removing meeting with key: " + meeting.key);
      this.angularfire.list(this.api).remove(meeting.key);

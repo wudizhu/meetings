@@ -19,7 +19,7 @@ export class EmailComponent implements OnInit {
   email: string = "";
   password: string = "";
   goBack: string = "";
-  authenticationTest: string;
+  authenticationState: string;
 
   // formControl = new FormControl('', Validators.required);
   // emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
@@ -78,13 +78,9 @@ export class EmailComponent implements OnInit {
     this.welcome = "Login as Administrator.";
     this.goBack = "Or continue as guest.";
     if (this.auth.isAuthenticated) {
-      this.authenticationTest = this.auth.currentUid;
+      this.authenticationState = this.auth.currentUid;
     } else {
-      this.authenticationTest = "Something wrong with Auth";
-    }
-    if (this.auth.isAuthenticated) {
-      // this.authenticationTest
-      // this.router.navigateByUrl("/lifemeetings");
+      this.authenticationState = "Something wrong with Auth";
     }
   }
 }
