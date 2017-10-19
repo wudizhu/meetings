@@ -35,6 +35,7 @@ export class meetingsComponent implements OnInit {
   searchText: string = "";
   newMeeting : Meeting;
   // Declare local variable
+  displayComingSoon : boolean = false;
 
   sortingProperty: string = "time";
   isDesc: boolean = true;
@@ -72,6 +73,19 @@ export class meetingsComponent implements OnInit {
     //prepare for adding a new meeting
     this.addingMeeting = true;
     this.newMeeting = new Meeting();
+  }
+
+  updateMeeting(meeting){
+    if (this.displayComingSoon) {
+    this.displayComingSoon = false;
+    }
+    else {
+      this.displayComingSoon = true;
+    }
+  }
+
+  removeMeeting(meeting){
+    this.updateMeeting(meeting);
   }
 
 

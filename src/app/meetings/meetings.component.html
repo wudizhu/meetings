@@ -56,33 +56,57 @@
     </div>
     <div class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
       <!--each meeting goes here -->
-
-
-
       <md-card class="meeting-text" [style.background]="'#FFFFFF'">
         <md-card-header>
           <md-card-title>
-          <md-chip-list >
-            <md-chip color="primary" selected="true">{{meeting.time}}</md-chip>
-          </md-chip-list>
+
+            <md-chip-list>
+              <button md-mini-fab md-icon-button color="accent">
+                <md-icon class="md-18|md-24|md-36|md-48">date_range</md-icon>
+              </button>
+              <md-chip color="primary" selected="true">{{meeting.time}}</md-chip>
+            </md-chip-list>
           </md-card-title>
           <md-card-title>
-          <md-chip-list >
-            <md-chip color="accent" selected="true"><label>Talk: </label>{{meeting.description}} </md-chip>
-          </md-chip-list>
+            <md-chip-list>
+              <button md-mini-fab md-icon-button color="accent">
+                <md-icon class="md-18|md-24|md-36|md-48">title</md-icon>
+              </button>
+              <md-chip class="meeting-description" color="accent" selected="true"><label>Talk: </label>{{meeting.description}} </md-chip>
+            </md-chip-list>
           </md-card-title>
-        <md-card-title>
-          <md-chip-list >
-            <md-chip color="warn" selected="true"><label>Speaker: </label>{{meeting.speaker}}</md-chip>
-          </md-chip-list>
+          <md-card-title>
+            <md-chip-list>
+              <button md-mini-fab md-icon-button color="accent">
+                <md-icon class="md-18|md-24|md-36|md-48">perm_identity</md-icon>
+              </button>
+              <md-chip color="warn" selected="true"><label>Speaker: </label>{{meeting.speaker}}</md-chip>
+            </md-chip-list>
           </md-card-title>
           <div *ngIf="this.shouldDisplayPic(meeting.speakerPictureURL)">
             <img src={{meeting.speakerPictureURL}}>
           </div>
           <div *ngIf="this.shouldDisplayStatus(meeting.status)">
-            <md-card-title [style.color]="'#FF5252'">{{meeting.status}}</md-card-title>
+            <md-card-title [style.color]="'#FF5252'">
+              <button md-mini-fab md-icon-button color="accent">
+                <md-icon class="md-18|md-24|md-36|md-48">info</md-icon>
+              </button>
+              {{meeting.status}}
+            </md-card-title>
+            </div>
+          <div *ngIf="displayComingSoon">
+            <md-card-title [style.color]="'#FF5252'">
+              <button md-mini-fab md-icon-button color="accent">
+                <md-icon class="md-18|md-24|md-36|md-48">info</md-icon>
+              </button>
+              <span>Coming Soon!</span>
+              </md-card-title>
           </div>
         </md-card-header>
+        <md-card-actions *ngIf="auth.isAuthenticated">
+          <button (click)="updateMeeting(meeting)" md-raised-button color="accent" class="action-button">Update</button>
+          <button (click)="removeMeeting(meeting)"md-raised-button color="accent" class="action-button">Delete</button>
+        </md-card-actions>
       </md-card>
     </div>
   </div>
