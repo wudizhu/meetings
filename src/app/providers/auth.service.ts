@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
 }
 
 @Injectable()
-export class AuthService implements OnDestroy {
+export class AuthService {
   private authState: firebase.User;
   private user: User;
   private users: User[];
@@ -42,9 +42,6 @@ export class AuthService implements OnDestroy {
     this.init();
   }
 
-  public ngOnDestroy() {
-    this.alive = false;
-  }
 
   private init(): void {
     this.alive = true;
@@ -64,6 +61,7 @@ export class AuthService implements OnDestroy {
             this.logger.log(
               "the displayed user is: " + JSON.stringify(this.user)
             );
+
           });
       }
     });

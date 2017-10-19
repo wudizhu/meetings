@@ -27,16 +27,16 @@
   <div fxLayout="column">
     <div class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
       <!--each meeting goes here -->
-      <md-card class="meeting-text" [style.background]="'#FFFFF7'">
+      <md-card class="meeting-text" [style.background]="'#7B1FA2'">
         <md-card-header>
-          <md-card-title [style.fontsize]="200">{{meeting.time}}</md-card-title>
+          <md-card-title>{{meeting.time}}</md-card-title>
           <md-card-title><label>Talk: </label>{{meeting.description}} </md-card-title>
           <md-card-title><label>Speaker: </label>{{meeting.speaker}}</md-card-title>
           <div *ngIf="this.shouldDisplayPic(meeting.speakerPictureURL)">
             <img src={{meeting.speakerPictureURL}}>
           </div>
-          <div class="accent" *ngIf="this.shouldDisplayStatus(meeting.status)">
-            <md-card-title>{{meeting.status}}</md-card-title>
+          <div *ngIf="this.shouldDisplayStatus(meeting.status)">
+            <md-card-title [style.color]="'#EA80FC'">{{meeting.status}}</md-card-title>
           </div>
         </md-card-header>
       </md-card>

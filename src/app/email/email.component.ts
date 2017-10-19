@@ -19,7 +19,6 @@ export class EmailComponent implements OnInit {
   email: string = "";
   password: string = "";
   goBack: string = "";
-  authenticationState: string;
 
   // formControl = new FormControl('', Validators.required);
   // emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
@@ -75,12 +74,7 @@ export class EmailComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.welcome = "Login as Administrator.";
-    this.goBack = "Or continue as guest.";
-    if (this.auth.isAuthenticated) {
-      this.authenticationState = this.auth.currentUid;
-    } else {
-      this.authenticationState = "Something wrong with Auth";
-    }
+    this.welcome = "Login as Administrator";
+    this.goBack = "Or continue as guest";
   }
 }
