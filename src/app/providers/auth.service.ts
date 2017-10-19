@@ -57,11 +57,12 @@ export class AuthService {
               return item;
             });
           }).takeWhile(()=> this.alive).subscribe(users => {
-            this.user = users[0];
-            this.logger.log(
-              "the displayed user is: " + JSON.stringify(this.user)
-            );
-
+            if (users && users.length >= 1) {
+              this.user = users[0];
+              this.logger.log(
+                "the displayed user is: " + JSON.stringify(this.user)
+              );
+          }
           });
       }
     });

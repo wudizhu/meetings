@@ -56,7 +56,7 @@ export class EmailComponent implements OnInit {
           .then(
             data => {
               this.logger.log("Promise resolve recieved", data);
-              this.router.navigateByUrl("/lifemeetings");
+              this.router.navigate(["/lifemeetings"]);
             },
             err => {
               this.logger.log("Promise reject recieved", err);

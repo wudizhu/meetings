@@ -30,8 +30,10 @@ export class meetingsComponent implements OnInit {
   // meetingsList: Observable<Meeting[]>;
 
   user: string;
-  authenticationTest: string;
+  authenticationStatus: string;
+  addingMeeting: boolean;
   searchText: string = "";
+  newMeeting : Meeting;
   // Declare local variable
 
   sortingProperty: string = "time";
@@ -55,6 +57,23 @@ export class meetingsComponent implements OnInit {
     return (url !== "assets/images/placeholder.png");
   }
 
+  addMeeting(meeting: Meeting) {
+    this.logger.log("Meeting added with the data: " + JSON.stringify(meeting));
+    this.meetingFirebaseService.addMeeting(meeting);
+    this.addingMeeting=false;
+    this.newMeeting = new Meeting();
+  }
+
+  cancel() {
+    this.addingMeeting = false;
+  }
+
+  displayAddMeeting() {
+    //prepare for adding a new meeting
+    this.addingMeeting = true;
+    this.newMeeting = new Meeting();
+  }
+
 
   shouldDisplayStatus(status:string): boolean {
     return (status !== "Finished");
@@ -63,11 +82,12 @@ export class meetingsComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    this.addingMeeting = false;
     this.logger.log("loading meetings!");
     if (this.auth.isAuthenticated) {
-      this.authenticationTest = this.auth.currentUid;
+      this.authenticationStatus = this.auth.currentUid;
     } else {
-      this.authenticationTest = "Something wrong with Auth";
+      this.authenticationStatus = "Something wrong with Auth";
     }
 
 
@@ -94,7 +114,7 @@ export class meetingsComponent implements OnInit {
     private meetingFirebaseService: meetingFirebaseService,
     private route: ActivatedRoute,
     private logger: Logger,
-    private auth : AuthService
+    public auth : AuthService
   ) { }
 
 
@@ -103,9 +123,8 @@ export class meetingsComponent implements OnInit {
     this.user = person; //set the user for future calls within the same route
     if (service != null) {
       if (service == "firebase") {
-        this.meetingsObservable = <FirebaseListObservable<
-          Meeting[]
-          >>this.meetingFirebaseService.getAllMeetings(person).map(items => {
+        this.meetingsObservable = <FirebaseListObservable<Meeting[]>>
+          this.meetingFirebaseService.getAllMeetings(person).map(items => {
             this.logger.log("raw object is: " + JSON.stringify(items));
             return items.map(item => {
               this.logger.log("the meeting key is: " + item.$key);
@@ -118,7 +137,6 @@ export class meetingsComponent implements OnInit {
                 status: status
             } = item;
               let meeting = new Meeting(
-                item.$key,
                 time,
                 description,
                 speaker,

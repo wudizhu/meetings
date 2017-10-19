@@ -26,6 +26,10 @@ const routes: Routes = [
       path: 'lifemeetings',
       component: meetingsComponent
     },
+    {
+      path: 'lifemeetings/: person',
+      component: meetingsComponent
+    },
     { path: '**', component: PageNotFoundComponent },
 
 ]

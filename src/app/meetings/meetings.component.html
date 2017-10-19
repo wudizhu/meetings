@@ -1,15 +1,21 @@
 <div class="page-container">
   <div fxLayout="row" fxLayout.xs="column">
     <span class="heading" fxFlex="65%"><md-icon>people</md-icon>LiFE (Little France Electrophysiology) Group meeting</span>
-    <img fxFlex.gt-md="16%"  fxFlex.sm="30%" fxHide.xs  class="meeting-img logo" src="assets/images/cnr.jpg">
-    <img fxFlex.gt-md="12%"  fxHide.sm fxHide.xs class="meeting-img logo" src="assets/images/EdinburghNeuroscience.gif">
+    <img fxFlex.gt-md="16%" fxFlex.sm="30%" fxHide.xs class="meeting-img logo" src="assets/images/cnr.jpg">
+    <img fxFlex.gt-md="12%" fxHide.sm fxHide.xs class="meeting-img logo" src="assets/images/EdinburghNeuroscience.gif">
   </div>
 
-  <div class="action-bar" fxLayout="row" fxLayout.xs="column">
+  <div class="action-bar" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
     <div class="sort-bar">
       <label>Sort by Date: {{this.sortingOrder}} </label>
       <button md-raised-button md-icon-button (click)="sort()">
           <md-icon class="md-18|md-24|md-36|md-48">sort</md-icon>
+      </button>
+    </div>
+    <div *ngIf="auth.isAuthenticated" class="sort-bar">
+      <label>Add new meeting: </label>
+      <button md-raised-button md-icon-button (click)="displayAddMeeting()">
+          <md-icon class="md-18|md-24|md-36|md-48">add</md-icon>
       </button>
     </div>
     <div class="search-bar">
@@ -24,22 +30,59 @@
 
   </div>
 
+
+
   <div fxLayout="column">
+    <div class="card-container full-width" *ngIf="auth.isAuthenticated&&addingMeeting">
+      <!--each meeting goes here -->
+      <md-card>
+        <md-input-container>
+          <input mdInput maxlength="10" placeholder="Meeting Time" [(ngModel)]=newMeeting.time>
+        </md-input-container>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="2" mdInput #MeetingDescription maxlength="2000" placeholder="Talk Description"
+            [(ngModel)]=newMeeting.description></textarea>
+          <md-hint align="end">{{MeetingDescription.value.length}} / 2000</md-hint>
+        </md-input-container>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="1" mdInput #SpeakerName maxlength="256" placeholder="Speaker Name" [(ngModel)]=newMeeting.speaker></textarea>
+          <md-hint align="end">{{SpeakerName.value.length}} / 256</md-hint>
+        </md-input-container>
+        <md-card-actions>
+          <button (click)="addMeeting(newMeeting)" md-raised-button color="accent" class="action-button">Add</button>
+          <button (click)="cancel()" md-raised-button color="accent" class="action-button">Cancel</button>
+        </md-card-actions>
+      </md-card>
+    </div>
     <div class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
       <!--each meeting goes here -->
-      <md-card class="meeting-text" [style.background]="'#7B1FA2'">
+
+
+
+      <md-card class="meeting-text" [style.background]="'#FFFFFF'">
         <md-card-header>
-          <md-card-title>{{meeting.time}}</md-card-title>
-          <md-card-title><label>Talk: </label>{{meeting.description}} </md-card-title>
-          <md-card-title><label>Speaker: </label>{{meeting.speaker}}</md-card-title>
+          <md-card-title>
+          <md-chip-list >
+            <md-chip color="primary" selected="true">{{meeting.time}}</md-chip>
+          </md-chip-list>
+          </md-card-title>
+          <md-card-title>
+          <md-chip-list >
+            <md-chip color="accent" selected="true"><label>Talk: </label>{{meeting.description}} </md-chip>
+          </md-chip-list>
+          </md-card-title>
+        <md-card-title>
+          <md-chip-list >
+            <md-chip color="warn" selected="true"><label>Speaker: </label>{{meeting.speaker}}</md-chip>
+          </md-chip-list>
+          </md-card-title>
           <div *ngIf="this.shouldDisplayPic(meeting.speakerPictureURL)">
             <img src={{meeting.speakerPictureURL}}>
           </div>
           <div *ngIf="this.shouldDisplayStatus(meeting.status)">
-            <md-card-title [style.color]="'#EA80FC'">{{meeting.status}}</md-card-title>
+            <md-card-title [style.color]="'#FF5252'">{{meeting.status}}</md-card-title>
           </div>
         </md-card-header>
       </md-card>
     </div>
   </div>
-</div>

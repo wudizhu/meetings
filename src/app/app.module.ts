@@ -16,7 +16,7 @@ import { SignupComponent } from './signup/signup.component';
 import { AuthGuard, AuthService } from './providers/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import {MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
+import {MdChipsModule, MdSliderModule, MdSlideToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
 import { OverlayContainer, MdTabsModule } from "@angular/material";
 import { SearchMeetingPipe } from './pipes/search.pipe';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -68,7 +68,8 @@ export const firebaseConfig = {
     MdSlideToggleModule,
     MdTabsModule,
     FlexLayoutModule,
-    MdDialogModule
+    MdDialogModule,
+    MdChipsModule
   ],
   providers: [AuthGuard, AuthService, AngularFireAuth, AngularFireDatabase, Logger, meetingFirebaseService],
   bootstrap: [AppComponent]
