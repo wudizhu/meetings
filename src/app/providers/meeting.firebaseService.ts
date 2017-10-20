@@ -60,11 +60,13 @@ export class meetingFirebaseService {
 
   }
 
-  // removeMeeting(meeting:Meeting): void {
-  //   this.logger.log("the firebase api is : " + this.api);
-  //   this.angularfire.list(this.api).remove(meeting);
+  removeMeeting(meeting: Meeting): void {
+    this.logger.log("the firebase api is : " + this.api);
+    this.logger.log("removing gift with key: " + meeting.key);
+    this.angularfire.list(this.api).remove(meeting.key);
 
-  // }
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);

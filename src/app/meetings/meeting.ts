@@ -1,4 +1,5 @@
 export class Meeting {
+  key: string;
   time: string;
   description: string;
   speaker: string;
@@ -7,12 +8,14 @@ export class Meeting {
   status: string;
 
   constructor(
+    key: string = "",
     time: string = "",
     description: string = "",
     speaker: string = "" ,
     speakerPictureURL: string = "",
     speakerlink: string = "",
     status: string = "Ongoing") {
+    this.key = key;
     this.time = time;
     this.description = description;
     this.speakerPictureURL = !speakerPictureURL ? "assets/images/placeholder.png" : speakerPictureURL;
@@ -20,7 +23,5 @@ export class Meeting {
     this.speakerlink = speakerlink;
     this.status = status;
   }
-
-
 
 }

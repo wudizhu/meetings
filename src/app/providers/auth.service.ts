@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 
 import { FirebaseListObservable } from "angularfire2/database";
 import { meetingFirebaseService } from "app/providers/meeting.firebaseService";
@@ -29,55 +30,40 @@ export class AuthGuard implements CanActivate {
 @Injectable()
 export class AuthService {
   private authState: firebase.User;
-  private user: User;
-  private users: User[];
-  private alive: boolean;
+  private subject = new Subject<any>();
 
   constructor(
     private angularFireAuth: AngularFireAuth,
     public logger: Logger,
     private router: Router,
-    public meetingsService: meetingFirebaseService
   ) {
     this.init();
   }
 
 
+  sendMessage(message: string) {
+    this.subject.next(message);
+  }
+
+  clearMessage() {
+    this.subject.next();
+  }
+
+  getMessage(): Observable<any> {
+    return this.subject.asObservable();
+  }
+
   private init(): void {
-    this.alive = true;
+    // this.alive = true;
     this.angularFireAuth.authState.subscribe(authState => {
       if (authState !== null) {
         this.authState = authState;
-        this.meetingsService
-          .getUser(this.authState.uid)
-          .map(items => {
-            this.logger.log("raw users object is: " + JSON.stringify(items));
-            return items.map(item => {
-              this.logger.log("the user is: " + JSON.stringify(item));
-              return item;
-            });
-          }).takeWhile(()=> this.alive).subscribe(users => {
-            if (users && users.length >= 1) {
-              this.user = users[0];
-              this.logger.log(
-                "the displayed user is: " + JSON.stringify(this.user)
-              );
-          }
-          });
       }
     });
   }
 
   public get currentUid(): string {
     return this.authState ? this.authState.uid : undefined;
-  }
-
-  public get currentUser(): User {
-    if (this.authState) {
-      return this.user;
-    } else {
-      return undefined;
-    }
   }
 
   public get currentUserObservable(): Observable<firebase.User> {

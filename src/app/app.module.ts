@@ -27,6 +27,7 @@ import { meetingFirebaseService } from "app/providers/meeting.firebaseService";
 
 
 
+
 export const firebaseConfig = {
     firebase: {
       apiKey: "AIzaSyBgNxQTpJRuPBbvQkfmMDTuI6NdbjLZYAw",
@@ -71,6 +72,9 @@ export const firebaseConfig = {
     MdDialogModule,
     MdChipsModule
   ],
+  // entryComponents: [
+  //   ProceedDeleteDialog
+  // ],
   providers: [AuthGuard, AuthService, AngularFireAuth, AngularFireDatabase, Logger, meetingFirebaseService],
   bootstrap: [AppComponent]
 })

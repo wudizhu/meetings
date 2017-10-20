@@ -50,13 +50,31 @@
         </md-input-container>
         <md-card-actions>
           <button (click)="addMeeting(newMeeting)" md-raised-button color="accent" class="action-button">Add</button>
-          <button (click)="cancel()" md-raised-button color="accent" class="action-button">Cancel</button>
+          <button (click)="cancelAddMeeTing()" md-raised-button color="accent" class="action-button">Cancel</button>
         </md-card-actions>
       </md-card>
     </div>
     <div class="card-container full-width" *ngFor="let meeting of meetings | SearchMeeting: searchText | orderBy: {property: sortingProperty, direction: direction}">
       <!--each meeting goes here -->
-      <md-card class="meeting-text">
+       <md-card *ngIf="auth.isAuthenticated&&EditingMeeting">
+        <md-input-container>
+          <input mdInput maxlength="10" placeholder="Meeting Time" [(ngModel)]=meeting.time>
+        </md-input-container>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="2" mdInput #MeetingDescription maxlength="2000" placeholder="Talk Description"
+            [(ngModel)]=meeting.description></textarea>
+          <md-hint align="end">{{MeetingDescription.value.length}} / 2000</md-hint>
+        </md-input-container>
+        <md-input-container class="full-width word-wrap">
+          <textarea mdTextareaAutosize mdAutosizeMinRows="1" mdInput #SpeakerName maxlength="256" placeholder="Speaker Name" [(ngModel)]=meeting.speaker></textarea>
+          <md-hint align="end">{{SpeakerName.value.length}} / 256</md-hint>
+        </md-input-container>
+        <md-card-actions>
+          <button (click)="updateMeeting(meeting)" md-raised-button color="accent" class="action-button">Update</button>
+          <button (click)="cancelEditMeeTing(meeting)" md-raised-button class="action-button">Cancel</button>
+        </md-card-actions>
+      </md-card>
+      <md-card class="meeting-text" *ngIf="!EditingMeeting">
         <md-card-header>
           <md-card-title>
                {{meeting.time}}
@@ -86,8 +104,8 @@
           </div>
         </md-card-header>
         <md-card-actions *ngIf="auth.isAuthenticated">
-          <button (click)="updateMeeting(meeting)" md-raised-button color="accent" class="action-button">Update</button>
-          <button (click)="removeMeeting(meeting)"md-raised-button color="accent" class="action-button">Delete</button>
+          <button (click)="beginEditMeeTing(meeting)" md-raised-button color="accent" class="action-button">Edit</button>
+          <button (click)="removeMeeting(meeting)"md-raised-button class="action-button">Delete</button>
         </md-card-actions>
       </md-card>
     </div>

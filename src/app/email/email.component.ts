@@ -1,3 +1,4 @@
+import { meetingFirebaseService } from 'app/providers/meeting.firebaseService';
 import { AuthService } from "app/providers/auth.service";
 import { Logger } from "app/providers/logger.service";
 import { Component, OnInit } from "@angular/core";
@@ -26,7 +27,8 @@ export class EmailComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private logger: Logger
+    private logger: Logger,
+    private mf: meetingFirebaseService
   ) {}
 
   home() {
@@ -56,7 +58,10 @@ export class EmailComponent implements OnInit {
           .then(
             data => {
               this.logger.log("Promise resolve recieved", data);
+              this.logger.log("Promise resolve recieved with uid: ", data.uid);
+              this.auth.sendMessage(data.uid);
               this.router.navigate(["/lifemeetings"]);
+
             },
             err => {
               this.logger.log("Promise reject recieved", err);
