@@ -85,7 +85,12 @@ export class meetingsComponent implements OnInit {
   }
 
   removeMeeting(meeting){
-    this.updateMeeting(meeting);
+    if (this.displayComingSoon) {
+    this.displayComingSoon = false;
+    }
+    else {
+      this.displayComingSoon = true;
+    }
   }
 
 

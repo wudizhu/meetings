@@ -12,6 +12,7 @@ img.meeting-img {
     max-height: 80px;
 }
 
+
 .heading {
     font-size: 40px;
     font-family: Acme;
@@ -26,10 +27,14 @@ img.meeting-img {
 
 }
 
+.mat-card {
+  background-image: url("../../assets/textures/texture7.jpg");
+}
+
 
 .mat-card-header .mat-card-title {
     font-size: x-large;
-    color: white;
+    color: black;
 }
 
 
@@ -74,7 +79,7 @@ img.meeting-img {
 .card-container {
     border: 2px solid #ccc;
     max-width: 100%;
-    margin: auto;
+    margin-bottom: 20px;
     box-shadow: 0 5px 5px 0;
 }
 
