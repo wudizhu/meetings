@@ -1,3 +1,4 @@
+import { ProceedDeleteDialog, ProceedDelete } from 'app/meetings/proceedDeleteDialog.component';
 import { OrderrByPipe } from './pipes/orderBy.pipe';
 import { meetingsComponent } from './meetings/meetings.component';
 import { Logger } from './providers/logger.service';
@@ -49,7 +50,9 @@ export const firebaseConfig = {
     PageNotFoundComponent,
     meetingsComponent,
     SearchMeetingPipe,
-    OrderrByPipe
+    OrderrByPipe,
+    ProceedDelete,
+    ProceedDeleteDialog
   ],
   imports: [
     BrowserModule,
@@ -72,9 +75,9 @@ export const firebaseConfig = {
     MdDialogModule,
     MdChipsModule
   ],
-  // entryComponents: [
-  //   ProceedDeleteDialog
-  // ],
+  entryComponents: [
+    ProceedDeleteDialog
+  ],
   providers: [AuthGuard, AuthService, AngularFireAuth, AngularFireDatabase, Logger, meetingFirebaseService],
   bootstrap: [AppComponent]
 })

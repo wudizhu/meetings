@@ -1,3 +1,4 @@
+import {ProceedDelete, ProceedDeleteDialog} from 'app/meetings/proceedDeleteDialog.component';
 import { meetingFirebaseService } from "app/providers/meeting.firebaseService";
 import { AuthService } from "./../providers/auth.service";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -12,6 +13,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 import { Logger } from "app/providers/logger.service";
+
 
 
 
