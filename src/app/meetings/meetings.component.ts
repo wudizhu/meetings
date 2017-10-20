@@ -1,4 +1,4 @@
-import {ProceedDelete, ProceedDeleteDialog} from 'app/meetings/proceedDeleteDialog.component';
+import {ProceedDeleteDialog} from 'app/meetings/proceedDeleteDialog.component';
 import { meetingFirebaseService } from "app/providers/meeting.firebaseService";
 import { AuthService } from "./../providers/auth.service";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -13,9 +13,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 import { Logger } from "app/providers/logger.service";
-
-
-
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
   selector: "meetings",
@@ -136,6 +134,7 @@ export class meetingsComponent implements OnInit {
     //Add 'implements OnInit' to the class.
     this.addingMeeting = false;
     this.EditingMeeting = false;
+    this.proceedDelete = false;
     this.logger.log("loading meetings!");
     if (this.auth.isAuthenticated) {
       this.authenticationStatus = this.auth.currentUid;
@@ -164,6 +163,7 @@ export class meetingsComponent implements OnInit {
     private route: ActivatedRoute,
     private logger: Logger,
     public auth: AuthService,
+    public dialog: MdDialog
   ) {}
 
   getAllmeetings(person, service): FirebaseListObservable<Meeting[]> {
@@ -205,6 +205,23 @@ export class meetingsComponent implements OnInit {
 
   errorHandler(event) {
     this.logger.log(event);
+  }
+
+
+  proceedDelete : boolean;
+
+  openDialog(meeting : Meeting) {
+    let dialogRef = this.dialog.open(ProceedDeleteDialog, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.proceedDelete = result;
+      if (this.proceedDelete === true) {
+        this.logger.log("Proceed to delete meeting is: " + this.proceedDelete);
+        this.logger.log("Proceed to delete meeting with data: "+ JSON.stringify(meeting));
+        this.removeMeeting(meeting);
+      }
+    });
   }
 }
 

@@ -105,8 +105,7 @@
         </md-card-header>
         <md-card-actions *ngIf="auth.isAuthenticated">
           <button (click)="beginEditMeeTing(meeting)" md-raised-button color="accent" class="action-button">Edit</button>
-          <!-- <button (click)="removeMeeting(meeting)"md-raised-button class="action-button">Delete</button> -->
-         <proceedDelete></proceedDelete>
+          <button (click)="openDialog(meeting)" md-raised-button class="action-button">Delete</button>
         </md-card-actions>
       </md-card>
     </div>
