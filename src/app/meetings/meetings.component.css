@@ -28,7 +28,7 @@ img.meeting-img {
 }
 
 .mat-card {
-  background-image: url("../../assets/textures/texture7.jpg");
+  background-image: url("../../assets/textures/texture1.jpg");
 }
 
 
@@ -80,6 +80,7 @@ img.meeting-img {
     border: 2px solid #ccc;
     max-width: 100%;
     margin-bottom: 20px;
+    margin-left: 35px;
     box-shadow: 0 5px 5px 0;
 }
 
@@ -87,9 +88,6 @@ img.meeting-img {
     border: 2px solid darkslategray;
 }
 
-/* .mat-card-title {
-  font-size: 40px;
-} */
 .card-container img {
     border-radius: 5%;
 }
@@ -136,6 +134,10 @@ img.meeting-img {
     .meeting-description {
         max-width: 70%;
     }
+
+    .card-container {
+      margin-left: 15px;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -160,4 +162,8 @@ img.meeting-img {
     .meeting-description {
         max-width: 50%;
     }
+    .card-container {
+      margin-left: 5px;
+    }
 }
+
